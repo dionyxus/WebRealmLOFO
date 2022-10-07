@@ -44,6 +44,80 @@
         import { getDatabase, ref, set, child, get } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
 
         const db = getDatabase();
+
+        //References to text fields
+        const name = document.getElementById('nameInp')
+        const email = document.getElementById('emailInp')
+        const username = document.getElementById('userInp')
+        const password = document.getElementById('passwordInp')
+        const submit = document.getElementById('sub-btn')
+
+        //Validation
+        function Validation(){
+            let nameregex = /^[a-zA-Z\s]+$/;
+            let emailregex = /^[a-zA-Z0-9]+@(gmail|yahoo|outlook)\.com$/;
+            let userregex = /^[a-zA-Z0-9]{5,}$/;
+
+            if(!nameregex.test(name.value)){
+                alert("the name should only contain alphabets")
+                return false;
+            }
+
+            if(!emailregex.test(email.value)){
+                alert("enter a valid email")
+                return false;
+            }
+
+            if(!userregex.test(username.value)){
+                alert("username can only be alphanumeric\n-username must contain 5 characters\nusername cannot contain special characters")
+                return false;
+            }
+
+            return true;
+        }
+
+        //Registration to Firebase
+        function RegisterUser(){
+            if (!Validation()){
+                return
+            };
+
+            const dbRef = ref(db);
+
+            get(child(dbRef, "UsersList/"+ username.value)).then((snapshot)=>{
+                if(snapshot.exists()){
+                    alert("account already exist");
+                }
+ 
+                else {
+                    set(ref(db, "UsersList/"+ username.value),
+                    {
+                        fullname: name.value,
+                        email: email.value,
+                        username: username.value,
+                        password: password.value
+                    })
+                    .then(()=>{
+                        alert("user added successfully");
+                    })
+                    .catch((error)=>{
+                        alert("error"+ error);
+                    })
+                }
+
+            });
+
+           
+
+        
+        }
+
+ //button event listener
+ submit.addEventListener('click', RegisterUser);
+
+
+
+
       </script>  
 </body>
 </html>
