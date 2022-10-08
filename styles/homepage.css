@@ -5,3 +5,9 @@ h1{
     align-items: center;  
     height: 100vh;
 }
+
+video,
+canvas {
+  background-color: #aaa4;
+  margin: 1em;
+}
