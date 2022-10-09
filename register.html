@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+        
+    <div>
+        <h3>Sign Up</h3>
+        <input type="text" placeholder="Fullname" id="nameInp" class="form-control mb-3">
+        <input type="email" placeholder="Email" id="emailInp" class="form-control mb-3">
+        <input type="text" placeholder="Username" id="userInp" class="form-control mb-3">
+        <input type="password" placeholder="Password" id="passwordInp" class="form-control mb-3">
+        <button type="text" id="sub-btn" class="btn btn-outline-primary mb-3">Sign Up</button>
+        <a href="login.html" class="badge badge-secondary py-1">Already have an account</a>
+
+    </div>
+
+
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBMx31QtrMbR37h2mEGKz13uLuy9zc4WQY",
+          authDomain: "spotman-79102.firebaseapp.com",
+          projectId: "spotman-79102",
+          storageBucket: "spotman-79102.appspot.com",
+          messagingSenderId: "1005689936375",
+          appId: "1:1005689936375:web:915c256b30aa7b7cb5b6f2"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        import { getDatabase, ref, set, child, get } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+
+        const db = getDatabase();
+
+        //References to text fields
+        const name = document.getElementById('nameInp')
+        const email = document.getElementById('emailInp')
+        const username = document.getElementById('userInp')
+        const password = document.getElementById('passwordInp')
+        const submit = document.getElementById('sub-btn')
+
+        //Validation
+
+        function isEmptyOrSpaces(str){
+            return str === null || str.match(/^ *$/) !== null;
+        }
+
+        function Validation(){
+            let nameregex = /^[a-zA-Z\s]+$/;
+            let emailregex = /^[a-zA-Z0-9]+@(gmail|yahoo|outlook)\.com$/;
+            let userregex = /^[a-zA-Z0-9]{5,}$/;
+
+        if(isEmptyOrSpaces(name.value) || isEmptyOrSpaces(email.value) || isEmptyOrSpaces(username.value) || isEmptyOrSpaces(password.value)){
+            alert("you cannot leave any field empty")
+            return false;
+        }
+
+            if(!nameregex.test(name.value)){
+                alert("the name should only contain alphabets")
+                return false;
+            }
+
+            if(!emailregex.test(email.value)){
+                alert("enter a valid email")
+                return false;
+            }
+
+            if(!userregex.test(username.value)){
+                alert("username can only be alphanumeric\n-username must contain 5 characters\nusername cannot contain special characters")
+                return false;
+            }
+
+            return true;
+        }
+
+        //Registration to Firebase
+        function RegisterUser(){
+            if (!Validation()){
+                return
+            };
+
+            const dbRef = ref(db);
+
+            get(child(dbRef, "UsersList/"+ username.value)).then((snapshot)=>{
+                if(snapshot.exists()){
+                    alert("account already exist");
+                }
+ 
+                else {
+                    set(ref(db, "UsersList/"+ username.value),
+                    {
+                        fullname: name.value,
+                        email: email.value,
+                        username: username.value,
+                        password: password.value
+                    })
+                    .then(()=>{
+                        alert("user added successfully");
+                    })
+                    .catch((error)=>{
+                        alert("error"+ error);
+                    })
+                }
+
+            });
+
+           
+
+        
+        }
+
+ //button event listener
+ submit.addEventListener('click', RegisterUser);
+
+
+
+
+      </script>  
+</body>
+</html>
