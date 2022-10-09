@@ -43,6 +43,46 @@
         import { getDatabase, ref, set, child, get } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
 
         const db = getDatabase();
+
+        //References to text fields
+        const username = document.getElementById('userInp')
+        const password = document.getElementById('passwordInp')
+        const submit = document.getElementById('sub-btn')
+
+        //Authenticate (allow user to login)
+        function AuthenticateUser(){
+            const dbref = ref(db);
+
+get(child(dbref, "UsersList/"+ username.value)).then((snapshot)=>{
+    if(snapshot.exists()){
+        let dbpass = snapshot.val().password;
+        if(dbpass == password.value){
+        login();
+    }
+    else
+        {
+           alert("user does not exist");
+        }
+}
+        else 
+        {
+            alert("username or password is invalid");
+        }
+    });
+}
+
+//Login
+function login(user){
+    sessionStorage.setItem('user', JSON.stringify(user));
+    window.location = "home.html";
+}
+
+//button event listener
+submit.addEventListener('click', AuthenticateUser);
+
+
+
+
       </script>  
 </body>
 </html>

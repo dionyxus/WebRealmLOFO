@@ -40,10 +40,10 @@
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item mx-1">
                   <a id="userlink" class="nav-link" href="">Username</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-1">
                   <a id="signoutlink" class="nav-link" href="#">Sign Out</a>
                 </li>
                 
@@ -51,5 +51,55 @@
           </form>
         </div>
       </nav>
+
+      <h3 id="hh"></h3>
+
+      <script>
+        //References
+        let userlink = document.getElementById('userlink');
+        let signoutlink = document.getElementById('signoutlink')
+        let header = document.getElementById('hh')
+        var currentUser = null;
+
+        //Functions
+        function getUsername(){
+            currentUser = (sessionStorage.getItem('user'));
+        }
+
+        function Signout(){
+            sessionStorage.removeItem('user');
+            window.location = "home.html";
+        }
+
+        //Window Loads
+        window.onload = function(){
+            getUsername();
+            if(currentUser == null){
+                userlink.innerText = "Create new account";
+                userlink.classList.replace("nav-link", "btn");
+                userlink.classList.add("btn-primary");
+                userlink.href = "register.html";
+
+                signoutlink.innerText = "Login";
+                signoutlink.classList.replace("nav-link", "btn");
+                signoutlink.classList.add("btn-success");
+                signoutlink.href = "login.html";
+            }
+
+            else {
+                userlink.innerText = "User"
+                header.innerText = "welcome";
+                userlink.classList.replace("btn", "nav-link");
+                userlink.classList.add("btn-primary");
+                userlink.href = "#";
+
+                signoutlink.innerText = "Signed Out";
+                signoutlink.classList.replace("btn", "nav-link");
+                signoutlink.classList.add("btn-success");
+                signoutlink.href = "javascript:Signout()";
+            }
+        }
+
+      </script>
 </body>
 </html>

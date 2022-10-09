@@ -53,10 +53,20 @@
         const submit = document.getElementById('sub-btn')
 
         //Validation
+
+        function isEmptyOrSpaces(str){
+            return str === null || str.match(/^ *$/) !== null;
+        }
+
         function Validation(){
             let nameregex = /^[a-zA-Z\s]+$/;
             let emailregex = /^[a-zA-Z0-9]+@(gmail|yahoo|outlook)\.com$/;
             let userregex = /^[a-zA-Z0-9]{5,}$/;
+
+        if(isEmptyOrSpaces(name.value) || isEmptyOrSpaces(email.value) || isEmptyOrSpaces(username.value) || isEmptyOrSpaces(password.value)){
+            alert("you cannot leave any field empty")
+            return false;
+        }
 
             if(!nameregex.test(name.value)){
                 alert("the name should only contain alphabets")
