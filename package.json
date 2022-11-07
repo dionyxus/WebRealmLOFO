@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "firebase": "^9.12.1"
+  },
+  "name": "webrealmlofo",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dionyxus/WebRealmLOFO.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dionyxus/WebRealmLOFO/issues"
+  },
+  "homepage": "https://github.com/dionyxus/WebRealmLOFO#readme"
+}
