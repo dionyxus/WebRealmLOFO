@@ -31,7 +31,7 @@ getDocs(colRef)
 
             postview.innerHTML += "" + //doc.data().title + "</br>" + doc.data().description + "</br>";
                 `<div class="item  col-xs-3 col-lg-3">
-                    <div class="thumbnail">
+                    <div class="thumbnail" id="${docu.id}">
                         <img class="group list-group-image" src=" ${docu.data().imageURL} " alt="" />
                         <div class="caption">
                             <h4 class="group inner list-group-item-heading">
@@ -54,7 +54,19 @@ getDocs(colRef)
                         </div>
                     </div>`
                     ;
+                    let griditem = document.getElementById(docu.id);
 
+                    if(griditem){
+                        console.log("Grid Item found" + docu.id);
+                        griditem.myparam = docu.id;
+
+                        griditem.addEventListener('click',(e)=>{
+                            console.log(e.currentTarget.myparam);
+                            localStorage.setItem("viewpostdocid",e.currentTarget.myparam);
+
+                            window.open('#viewpost',"_self");
+                        });
+                    }
             
         });
 //        console.log(posts);
@@ -90,7 +102,12 @@ async function getUser (coll, id) {
   });
   //console.log( "a" + getUser("Users", "WXEI52zcMANMDuXZ26kUw6DYVJp1"));
 
-function onpostclick(){
+function divfunc(){
 
-    console.log("Post clicked");
+    console.log("Div clicked");
 }
+
+testbutton.addEventListener('click', ()=>{
+    console.log("Button clicked");
+
+});
