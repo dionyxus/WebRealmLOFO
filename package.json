@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "firebase": "^9.12.1"
+    "firebase": "^9.13.0"
   },
   "name": "webrealmlofo",
   "description": "",
