@@ -32,7 +32,7 @@ getDocs(colRef)
             postview.innerHTML += "" + //doc.data().title + "</br>" + doc.data().description + "</br>";
                 `<div class="item  col-xs-3 col-lg-3">
                     <div class="thumbnail">
-                        <img class="group list-group-image" src="https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg" alt="" />
+                        <img class="group list-group-image" src=" ${docu.data().imageURL} " alt="" />
                         <div class="caption">
                             <h4 class="group inner list-group-item-heading">
                                 ${docu.data().title}</h4>
@@ -43,7 +43,7 @@ getDocs(colRef)
                                     <p class="lead">
                                         ${ 
                                             //docu.data().possibleLostDate
-                                            docu.data().userID
+                                            docu.data().username
                                          }</p>
                                 </div>
                             </div>

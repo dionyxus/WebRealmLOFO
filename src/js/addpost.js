@@ -4,6 +4,8 @@ import { getFirestore, collection, doc, setDoc, addDoc } from "firebase/firestor
 
 import { getAuth, signInWithPopup,onAuthStateChanged, GoogleAuthProvider } from "firebase/auth";
 
+import {getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
+
 const firebaseConfig = {
 apiKey: "AIzaSyAjKm0uKRHxIBRQtiR1ZFq-ZCTRmSh6M-U",
 authDomain: "webrealmlofo.firebaseapp.com",
@@ -26,6 +28,9 @@ const userColRef = collection(db, 'Users');
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
+const storage = getStorage();
+
+
 console.log("Slim Shady Posting.....");
 
 const user = auth.currentUser;
@@ -42,25 +47,53 @@ submitpostbutton.addEventListener('click', (e) => {
         const user = auth.currentUser;
         onAuthStateChanged(auth, (user) => {
                 if (user) {
-                        console.log("On Auth State Change - " + user.displayName);
-                        addDoc(colRef, {
-                                islost: lostRadioButton.checked,
-                                isfound: foundRadioButton.checked,
-                                title: title.value,
-                                description : desc.value,
-                                reward: reward.value,
-                                possiblelostdatetime: possibleLostDateTime.value,
-                                postcreatedtimestamp: Date.now(),
-                                userID: user.uid 
-                        })
-                        .then(() => {
-                                console.log("Post Submitted");
-                                postForm.reset();
-                        })
-                        .catch((error) => {
-                                console.log(error.message);
-                        })      
 
+                        console.log("On Auth State Change - " + user.displayName);
+
+                        let file = document.getElementById('itemimage').files[0];
+
+                        if(file){
+                                const storageRef = ref(storage, `ItemImages/${file.name}`);
+
+                                uploadBytes(storageRef, file)
+                                .then((snapshot) => {
+                                console.log('Uploaded image!');
+
+                                getDownloadURL(storageRef)
+                                        .then((url) => {
+                                        console.log(url);
+
+                                        addDoc(colRef, {
+                                                islost: lostRadioButton.checked,
+                                                isfound: foundRadioButton.checked,
+                                                title: title.value,
+                                                description : desc.value,
+                                                reward: reward.value,
+                                                possiblelostdatetime: possibleLostDateTime.value,
+                                                postcreatedtimestamp: Date.now(),
+                                                userid: user.uid,
+                                                username: user.displayName,
+                                                imageURL: url 
+                                        })
+                                        .then(() => {
+                                                console.log("Post Submitted");
+                                                postForm.reset();
+                                        })
+                                        .catch((error) => {
+                                                console.log(error.message);
+                                        })      
+                
+
+                                        })
+                                        .catch((error) => {
+                                        // Handle any errors
+                                        });
+
+                                }); 
+
+                        }
+
+                        
 
                 }else{
                         signInWithPopup(auth, provider)
