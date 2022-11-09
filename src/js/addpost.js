@@ -1,13 +1,11 @@
 
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, addDoc } from "firebase/firestore";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth, signInWithPopup,onAuthStateChanged, GoogleAuthProvider } from "firebase/auth";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import {getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
+
 const firebaseConfig = {
 apiKey: "AIzaSyAjKm0uKRHxIBRQtiR1ZFq-ZCTRmSh6M-U",
 authDomain: "webrealmlofo.firebaseapp.com",
@@ -25,43 +23,104 @@ const db = getFirestore();
 
 const colRef = collection(db, 'Posts');
 
+const userColRef = collection(db, 'Users');
+
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
+
+const storage = getStorage();
+
+
 console.log("Slim Shady Posting.....");
 
-/*
-const db = getDatabase();
+const user = auth.currentUser;
 
-submitpostbutton.addEventListener('click', submitForm);
+if(user)
+        console.log("User Dispname - " + user.displayName);
+else
+        console.log("No User");
 
-function submitForm(e){
-        e.preventDefault();
-
-        console.log("Posting Stuff");
-
-        set(ref(db, '/posts/' + 'post11'), {
-                    lost: postlostcheckbox.value,
-                    name: postname.value,
-                    desc: postdesc.value
-                });
-};
-*/
 submitpostbutton.addEventListener('click', (e) => {
 
         e.preventDefault();
+        
+        const user = auth.currentUser;
+        onAuthStateChanged(auth, (user) => {
+                if (user) {
 
-        addDoc(colRef, {
-                islost: lostRadioButton.checked,
-                isfound: foundRadioButton.checked,
-                title: title.value,
-                description : desc.value,
-                reward: reward.value,
-                possiblelostdatetime: possibleLostDateTime.value,
-                postcreatedtimestamp: Date.now()
-        })
-        .then(() => {
-                console.log("Post Submitted");
-                postForm.reset();
-        })
-        .catch((error) => {
-                console.log(error.message);
-        })
+                        console.log("On Auth State Change - " + user.displayName);
+
+                        let file = document.getElementById('itemimage').files[0];
+
+                        if(file){
+                                const storageRef = ref(storage, `ItemImages/${file.name}`);
+
+                                uploadBytes(storageRef, file)
+                                .then((snapshot) => {
+                                console.log('Uploaded image!');
+
+                                getDownloadURL(storageRef)
+                                        .then((url) => {
+                                        console.log(url);
+
+                                        addDoc(colRef, {
+                                                islost: lostRadioButton.checked,
+                                                isfound: foundRadioButton.checked,
+                                                title: title.value,
+                                                description : desc.value,
+                                                reward: reward.value,
+                                                possiblelostdatetime: possibleLostDateTime.value,
+                                                postcreatedtimestamp: Date.now(),
+                                                userid: user.uid,
+                                                username: user.displayName,
+                                                imageURL: url 
+                                        })
+                                        .then(() => {
+                                                console.log("Post Submitted");
+                                                postForm.reset();
+                                        })
+                                        .catch((error) => {
+                                                console.log(error.message);
+                                        })      
+                
+
+                                        })
+                                        .catch((error) => {
+                                        // Handle any errors
+                                        });
+
+                                }); 
+
+                        }
+
+                        
+
+                }else{
+                        signInWithPopup(auth, provider)
+                        .then((result) => {
+                            // This gives you a Google Access Token. You can use it to access the Google API.
+                            const credential = GoogleAuthProvider.credentialFromResult(result);
+                            const token = credential.accessToken;
+                            // The signed-in user info.
+                            user = result.user;
+            
+                                db.collection("Users").doc(user.uid).set({
+                                        userName: user.displayName
+                                });    
+
+                            console.log(user);
+                            // ...
+                        }).catch((error) => {
+                            // Handle Errors here.
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+                            // The email of the user's account used.
+                            //const email = error.customData.email;
+                            // The AuthCredential type that was used.
+                            const credential = GoogleAuthProvider.credentialFromError(error);
+                            // ...
+                        });
+                }
+        
+        });
 });
