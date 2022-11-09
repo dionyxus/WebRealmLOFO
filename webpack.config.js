@@ -8,7 +8,9 @@ module.exports = {
         addpost:'./src/js/addpost.js',
         routing:'./src/js/routing.js',
         script:'./src/js/script.js',
-        index:'./src/index.js'
+        index:'./src/index.js',
+        useracc:'./src/js/useracc.js',
+        viewpost:'./src/js/viewpost.js'
     },
     output: {
         path: path.resolve(__dirname,'dist'),

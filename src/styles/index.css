@@ -44,9 +44,21 @@ body {
   body {
     background: white;
     height: 100vh;
-    margin: 0;
+    margin-left:150px;
+    margin-right:150px;
   }
-  
+  .navibar{
+    background-color: grey;
+  }
+
+.navli li a{
+   display: block;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
   h1 {
     color: #bdbdbd;
     font-weight: 300;
@@ -81,7 +93,6 @@ body {
     background-color: #111;
   }
 
-  
   
   #mainArea {
     padding: 2em;
