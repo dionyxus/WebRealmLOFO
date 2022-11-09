@@ -42,13 +42,10 @@ getDocs(colRef)
                                 <div class="col-xs-12 col-md-6">
                                     <p class="lead">
                                         ${ 
-                                            //docu.data().possibleLostDate
-                                            docu.data().username
+                                            docu.data().possiblelostdatetime
+                                            //docu.data().username
                                          }</p>
                                 </div>
-                            </div>
-                            <div>
-                                <a href=#viewpost>View</a> //TRY JS
                             </div>
                         </div>
                         </div>
@@ -74,40 +71,4 @@ getDocs(colRef)
     })
     .catch(error => {
         console.log(error.message);
-});
-
-let elements = document.getElementsByClassName("thumbnail");
-
-for (var i = 0; i < elements.length; i++) {
-    elements[i].addEventListener('click', postclicked, false);
-}
-
-function postclicked(){
-        console.log("Post Clickeddddd");
-}
-
-async function getUser (coll, id) {
-    const snap = await getDoc(doc(db, coll, id))
-
-    if (snap.exists())
-      return snap.data().userName;
-    else
-      return Promise.reject(Error(`No such document: ${coll}.${id}`))
-  }
-
-  //console.log("Getting data");
-
-  getUser("Users", "WXEI52zcMANMDuXZ26kUw6DYVJp1").then((data)=>{
-    //console.log(data);
-  });
-  //console.log( "a" + getUser("Users", "WXEI52zcMANMDuXZ26kUw6DYVJp1"));
-
-function divfunc(){
-
-    console.log("Div clicked");
-}
-
-testbutton.addEventListener('click', ()=>{
-    console.log("Button clicked");
-
 });

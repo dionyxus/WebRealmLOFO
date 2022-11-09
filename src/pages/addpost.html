@@ -20,7 +20,7 @@
                   position:relative;
                    left:200px;
                 }
-                #form2{
+                #postForm2{
 
                   padding: 30px 30px;
         
@@ -67,7 +67,7 @@
 
             
 
-              <form id="postForm">
+              <form id="postForm1">
 
                 <tr>
                 <td><input type="radio" id="lostRadioButton" name="lost" value="lost">
@@ -91,13 +91,13 @@
                   </tr>
 
                 </table>
-                <table id="form2"  style="float:end;">
+                <table id="postForm2"  style="float:end;">
                 <tr>
                   <th>
                 <h3 style="color:white">Write item details:</h3></th></tr>
                 <tr>
                 <td>
-                <label for="title">Item Name</label>
+                <label for="title">Post title</label>
                 <input type="text" name="title" placeholder="Title" id="title" required></td></tr>
                 <tr><td>
                 <label for="Description">Description</label>
@@ -109,7 +109,7 @@
                 </td></tr>
                 <tr><td>
                 <label for="lostTime">Possible Lost Date/Time </label>
-                <input type="text" id="possibleLostDateTime" name="lostTime" placeholder="Lost Date/Time" required>
+                <input type="datetime-local" id="possibleLostDateTime" name="lostTime" placeholder="Lost Date/Time" required>
                 
                 <br><br>
                </td>
