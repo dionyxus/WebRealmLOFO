@@ -77,7 +77,7 @@ submitpostbutton.addEventListener('click', (e) => {
                                         })
                                         .then(() => {
                                                 console.log("Post Submitted");
-                                                postForm.reset();
+                                                postForm1.reset();
                                         })
                                         .catch((error) => {
                                                 console.log(error.message);

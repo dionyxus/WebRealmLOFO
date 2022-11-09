@@ -33,12 +33,15 @@ async function getData (coll, id) {
 
   console.log("Getting data");
 
-  getData("Posts","UXwKYvJspnEEFAgzTSCs" ).then((data)=>{
+  getData("Posts",localStorage.getItem("viewpostdocid") ).then((data)=>{
   //  console.log(data);
     
     document.getElementById("title").innerHTML = data.title;
     document.getElementById("desc").innerHTML = "Description - " + data.description;
     document.getElementById("username").innerHTML = "User Name - " + data.username;
+    document.getElementById("reward").innerHTML = "Reward - " + data.reward;
+    document.getElementById("datetime").innerHTML = "Possible Lost Date/Time - " + data.possiblelostdatetime;
+
     itemimage.src = data.imageURL;
 
   });
