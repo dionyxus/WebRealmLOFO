@@ -97,4 +97,22 @@ body {
   #mainArea {
     padding: 2em;
   }
-  
+  .footer{
+    min-height: 100px;
+    background-color: #111;
+    height: auto !important;
+    height: 100%;
+
+    margin: 0 auto -4em;
+  }
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .txt{
+    text-align: center;
+    color: #bdbdbd;
+    font-size: small;
+
+  }
