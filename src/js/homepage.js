@@ -65,7 +65,7 @@ function makePostGrid(postList ,postView){
         postView.innerHTML += "" + //doc.data().title + "</br>" + doc.data().description + "</br>";
         `<div class="item  col-xs-3 col-lg-3">
             <div class="thumbnail" id="${post.id}">
-                <img class="group list-group-image" src="" alt="" /> //docu.data().imageURL
+                <img class="group list-group-image" src="${post.imageURL}" alt="" /> //docu.data().imageURL
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading">
                         ${post.title}</h4>

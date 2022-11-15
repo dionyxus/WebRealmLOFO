@@ -82,15 +82,37 @@
                 </tr>
                 
                 <tr>
-                <td><h3><label for="myfile">Upload Item photo: </label></h3>
+                  <td><h3><label for="myfile">Geolocation: </label></h3>
+                </tr>
+
+                <tr>
+                <td><h3><label for="myfile">Capture or Upload Photo: </label></h3>
                 <input type="file" id="itemimage" name="myfile"><br><br></td>
                 </tr>
+                
                 <tr>
-                  <td><h3><label for="myfile">Geolocation: </label></h3>
+                  <td>
+                    <input type="checkbox" id="captureCheckbox">
+                  </td>
+                </tr>
 
-                  </tr>
+                  <tr>
+                    <td>
+
+                      <button id="start">Start Camera</button>
+                      <button id="snap">Snap Photo</button>
+
+                    <video id="video" width="320" height="240" autoplay></video>                
+                    <canvas id="canvas" width="320" height="240"></canvas>
+
+                    </td>
+                    </tr>
 
                 </table>
+
+
+                
+
                 <table id="postForm2"  style="float:end;">
                 <tr>
                   <th>

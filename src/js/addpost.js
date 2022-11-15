@@ -50,10 +50,22 @@ submitpostbutton.addEventListener('click', (e) => {
 
                         console.log("On Auth State Change - " + user.displayName);
 
-                        let file = document.getElementById('itemimage').files[0];
+                        let file;
+                        let storageRef;
+
+                        if(captureCheckbox.checked){
+                                // TODO add check for image capture
+                                storageRef = ref(storage, `ItemImages/${Date.now()}.jpg}`);
+                                file = jpegBlob;
+
+                        }else{
+                                file = document.getElementById('itemimage').files[0];
+                                storageRef = ref(storage, `ItemImages/${file.name}`);
+
+                        }
+
 
                         if(file){
-                                const storageRef = ref(storage, `ItemImages/${file.name}`);
 
                                 uploadBytes(storageRef, file)
                                 .then((snapshot) => {
@@ -124,3 +136,64 @@ submitpostbutton.addEventListener('click', (e) => {
         
         });
 });
+
+
+const context = canvas.getContext('2d');
+context.scale(0.5, 0.5);
+
+let jpegBlob;
+
+document.getElementById('start').addEventListener('click', function () {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          // Not adding `{ audio: true }` since we only want video now
+          navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+            //video.src = window.URL.createObjectURL(stream);
+            video.srcObject = stream;
+            // video.play();  // or autplay
+          });
+        } else {
+          console.log('media devices not available in this browser');
+        }
+      });
+
+      // Trigger photo take
+document.getElementById('snap').addEventListener('click', () => {
+        //canvas.width = video.videoWidth;
+        //canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0);
+
+//JPEG
+        var jpegFile = canvas.toDataURL("image/jpeg");
+
+        var jpegFile64 = jpegFile.replace(/^data:image\/(png|jpeg);base64,/, "");
+        jpegBlob = base64ToBlob(jpegFile64, 'image/jpeg');  
+
+        //Stop Cam
+        const tracks = video.srcObject.getTracks();
+        tracks.forEach((track) => track.stop());
+
+      });
+
+
+      function base64ToBlob(base64, mime) 
+      {
+          mime = mime || '';
+          var sliceSize = 1024;
+          var byteChars = window.atob(base64);
+          var byteArrays = [];
+
+          for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+              var slice = byteChars.slice(offset, offset + sliceSize);
+
+              var byteNumbers = new Array(slice.length);
+              for (var i = 0; i < slice.length; i++) {
+                  byteNumbers[i] = slice.charCodeAt(i);
+              }
+
+              var byteArray = new Uint8Array(byteNumbers);
+
+              byteArrays.push(byteArray);
+          }
+
+          return new Blob(byteArrays, {type: mime});
+      }
