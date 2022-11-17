@@ -21,7 +21,7 @@ measurementId: "G-ZZH3G9HQHW"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
-const colRef = collection(db, 'Posts');
+const postColRef = collection(db, 'Posts');
 
 const userColRef = collection(db, 'Users');
 
@@ -30,6 +30,10 @@ const auth = getAuth();
 
 const storage = getStorage();
 
+video.style.display = "none";
+canvas.style.display = "none";
+
+let isCaptureImage = false;
 
 console.log("Slim Shady Posting.....");
 
@@ -50,10 +54,19 @@ submitpostbutton.addEventListener('click', (e) => {
 
                         console.log("On Auth State Change - " + user.displayName);
 
-                        let file = document.getElementById('itemimage').files[0];
+                        let file;
+                        let storageRef;
+
+                        if(isCaptureImage){
+                                storageRef = ref(storage, `ItemImages/${Date.now()}.jpg}`);
+                                file = jpegBlob;
+                        }else{
+                                file = document.getElementById('uploadimage').files[0];
+                                storageRef = ref(storage, `ItemImages/${file.name}`);
+                        }
+
 
                         if(file){
-                                const storageRef = ref(storage, `ItemImages/${file.name}`);
 
                                 uploadBytes(storageRef, file)
                                 .then((snapshot) => {
@@ -63,7 +76,7 @@ submitpostbutton.addEventListener('click', (e) => {
                                         .then((url) => {
                                         console.log(url);
 
-                                        addDoc(colRef, {
+                                        addDoc(postColRef, {
                                                 islost: lostRadioButton.checked,
                                                 isfound: foundRadioButton.checked,
                                                 title: title.value,
@@ -78,11 +91,27 @@ submitpostbutton.addEventListener('click', (e) => {
                                         .then(() => {
                                                 console.log("Post Submitted");
                                                 postForm1.reset();
+                                                alert("Post Submitted!");
                                         })
                                         .catch((error) => {
                                                 console.log(error.message);
                                         })      
                 
+
+                                        addDoc(userColRef, {
+                                                userid: user.uid,
+                                                userName: user.displayName,
+                                                useremailid: user.email,
+                                                userPhoto: user.photoURL,
+                                                userContactNo: user.phoneNumber
+                                            })
+                                            .then(() => {
+                                                    console.log("User Added");
+                                            })
+                                            .catch((error) => {
+                                                    console.log(error.message);
+                                            }); 
+
 
                                         })
                                         .catch((error) => {
@@ -104,9 +133,9 @@ submitpostbutton.addEventListener('click', (e) => {
                             // The signed-in user info.
                             user = result.user;
             
-                                db.collection("Users").doc(user.uid).set({
-                                        userName: user.displayName
-                                });    
+                                // db.collection("Users").doc(user.uid).set({
+                                //         userName: user.displayName
+                                // });    
 
                             console.log(user);
                             // ...
@@ -123,4 +152,86 @@ submitpostbutton.addEventListener('click', (e) => {
                 }
         
         });
+
 });
+
+
+const context = canvas.getContext('2d');
+context.scale(0.5, 0.5);
+
+let jpegBlob;
+
+document.getElementById('start').addEventListener('click', function () {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          // Not adding `{ audio: true }` since we only want video now
+          navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+            //video.src = window.URL.createObjectURL(stream);
+            video.srcObject = stream;
+            video.style.display = "block";
+            itemimage.style.display = "none";
+            // video.play();  // or autplay
+          });
+        } else {
+          console.log('media devices not available in this browser');
+        }
+      });
+
+      // Trigger photo take
+document.getElementById('snap').addEventListener('click', () => {
+        //canvas.width = video.videoWidth;
+        //canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0);
+
+//JPEG
+        var jpegFile = canvas.toDataURL("image/jpeg");
+
+        var jpegFile64 = jpegFile.replace(/^data:image\/(png|jpeg);base64,/, "");
+        jpegBlob = base64ToBlob(jpegFile64, 'image/jpeg');  
+
+        //Stop Cam
+        const tracks = video.srcObject.getTracks();
+        tracks.forEach((track) => track.stop());
+
+        itemimage.setAttribute( "src", jpegFile);
+
+        video.style.display = "none";
+        canvas.style.display = "none";
+        itemimage.style.display = "block";
+
+        isCaptureImage = true;
+
+      });
+
+
+      function base64ToBlob(base64, mime) 
+      {
+          mime = mime || '';
+          var sliceSize = 1024;
+          var byteChars = window.atob(base64);
+          var byteArrays = [];
+
+          for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+              var slice = byteChars.slice(offset, offset + sliceSize);
+
+              var byteNumbers = new Array(slice.length);
+              for (var i = 0; i < slice.length; i++) {
+                  byteNumbers[i] = slice.charCodeAt(i);
+              }
+
+              var byteArray = new Uint8Array(byteNumbers);
+
+              byteArrays.push(byteArray);
+          }
+
+          return new Blob(byteArrays, {type: mime});
+      }
+
+
+uploadimage.addEventListener('change',(e) => {
+        e.preventDefault();
+
+        console.log("Upload init");
+        itemimage.setAttribute( "src", URL.createObjectURL(uploadimage.files[0]));
+
+        isCaptureImage = false;
+})
