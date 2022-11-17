@@ -22,53 +22,140 @@ const db = getFirestore();
 
 const colRef = collection(db, 'Posts');
 
+class Post{
+    constructor(postid, islost, isfound, title, description, reward, possiblelostdatetime, postcreatedtimestamp, userid, username, imageURL){
+        this.postid = postid;
+        this.islost = islost;
+        this.isfound = isfound;
+        this.title = title;
+        this.description = description;
+        this.reward = reward;
+        this.possiblelostdatetime = possiblelostdatetime;
+        this.postcreatedtimestamp = postcreatedtimestamp;
+        this.userid = userid;
+        this.username = username;
+        this.imageURL = imageURL;
+    }
+}
+
+let postList= [];
 
 getDocs(colRef)
     .then((snapshot) => {
-        let posts = [];
+//        let posts = [];
         snapshot.docs.forEach((docu) => {
-            posts.push({...docu.data(), id : docu.id});
+//           posts.push({...docu.data(), id : docu.id});
 
-            postview.innerHTML += "" + //doc.data().title + "</br>" + doc.data().description + "</br>";
-                `<div class="item  col-xs-3 col-lg-3">
-                    <div class="thumbnail" id="${docu.id}">
-                        <img class="group list-group-image" src=" ${docu.data().imageURL} " alt="" />
-                        <div class="caption">
-                            <h4 class="group inner list-group-item-heading">
-                                ${docu.data().title}</h4>
-                            <p class="group inner list-group-item-text">
-                                ${docu.data().description} </p>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        ${ 
-                                            docu.data().possiblelostdatetime
-                                            //docu.data().username
-                                         }</p>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>`
-                    ;
-                    let griditem = document.getElementById(docu.id);
-
-                    if(griditem){
-                        console.log("Grid Item found" + docu.id);
-                        griditem.myparam = docu.id;
-
-                        griditem.addEventListener('click',(e)=>{
-                            console.log(e.currentTarget.myparam);
-                            localStorage.setItem("viewpostdocid",e.currentTarget.myparam);
-
-                            window.open('#viewpost',"_self");
-                        });
-                    }
+            postList.push(new Post(docu.id, docu.data().islost, docu.data().isfound, docu.data().title, docu.data().description, docu.data().reward, docu.data().possiblelostdatetime, docu.data().postcreatedtimestamp, docu.data().userid, docu.data().username, docu.data().imageURL));
             
         });
-//        console.log(posts);
+
+        makePostGrid(postList, postview);
         
     })
     .catch(error => {
         console.log(error.message);
 });
+
+
+function makePostGrid(postList ,postView){
+
+    postList.forEach((post) => {
+
+        let postcontainer = document.createElement("div");
+        postcontainer.setAttribute("class",`item  col-xs-3 col-lg-3 `);
+        postcontainer.innerHTML += `
+            <div class="thumbnail" id="${post.postid}">
+                <img class="group list-group-image" src="${post.imageURL}" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        ${post.title}</h4>
+                    <p class="group inner list-group-item-text">
+                        ${post.description} </p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                ${ post.possiblelostdatetime}</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>`
+            ;
+
+            postview.appendChild(postcontainer);
+
+            let griditem = document.getElementById(post.postid);
+
+            if(griditem){
+                griditem.myparam = post.postid;
+
+                griditem.addEventListener('click',(e)=>{
+                localStorage.setItem("viewpostdocid",e.currentTarget.myparam);
+                window.open('#viewpost',"_self");
+                });
+            }
+
+    });
+
+}
+
+lostFilterButton.addEventListener('click',(e) => {
+    e.preventDefault();
+
+    postview.innerHTML = "";
+    let postLostList = [];
+
+    postList.forEach((post) => {
+        if(post.islost){
+            postLostList.push(post);
+        }
+    });
+
+    makePostGrid(postLostList, postview);
+
+});
+
+foundFilterButton.addEventListener('click',(e) => {
+    e.preventDefault();
+
+    postview.innerHTML = "";
+    let postFoundList = [];
+
+    postList.forEach((post) => {
+        if(post.isfound){
+            postFoundList.push(post);
+        }
+    });
+
+    makePostGrid(postFoundList, postview);
+
+});
+
+dateFilter.addEventListener('change', (e) => {
+    e.preventDefault();
+
+    postview.innerHTML = "";
+    let postDateList = [];
+
+    postList.forEach((post) => {
+        let selectedDate = dateFilter.value;
+
+        if(post.possiblelostdatetime.includes(selectedDate)){
+            postDateList.push(post);
+        }
+    });
+
+    makePostGrid(postDateList, postview);
+
+});
+
+clearFilterButton.addEventListener('click',(e) => {
+    e.preventDefault();
+
+    postview.innerHTML = "";
+    makePostGrid(postList, postview);
+
+});
+
+//console.log(postList);
