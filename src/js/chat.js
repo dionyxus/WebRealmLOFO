@@ -1,0 +1,133 @@
+console.log("Messages Page");
+
+import { initializeApp } from "firebase/app";
+import { documentId, getFirestore, collection, addDoc, doc, getDocs, getDoc } from "firebase/firestore";
+import { getAuth, signInWithPopup,onAuthStateChanged,GoogleAuthProvider } from "firebase/auth";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAjKm0uKRHxIBRQtiR1ZFq-ZCTRmSh6M-U",
+    authDomain: "webrealmlofo.firebaseapp.com",
+    databaseURL: "https://webrealmlofo-default-rtdb.firebaseio.com",
+    projectId: "webrealmlofo",
+    storageBucket: "webrealmlofo.appspot.com",
+    messagingSenderId: "900604719791",
+    appId: "1:900604719791:web:2e9ee3e286badcb5669a5a",
+    measurementId: "G-ZZH3G9HQHW"
+};
+    
+    // Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore();
+
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
+
+const messageColRef = collection(db, 'Messages');
+const userColRef = collection(db, 'Users');
+const postColRef = collection(db, 'Posts');
+
+let messages = new Map;
+let users = new Map;
+let posts = new Map;
+
+let dataloadcounter = 0;
+
+let currentUser;
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        currentUser = user;
+
+        dataloadcounter++;
+        makemessagelist();
+    }
+    else{
+        console.log("No User in Messages");
+    }
+}
+);
+
+getDocs(messageColRef)
+    .then((snapshot) => {
+        snapshot.docs.forEach((docu) => {
+
+            messages.set(docu.id, {
+                receiverid: docu.data().receiverid,
+                senderid: docu.data().senderid,
+                message: docu.data().message,
+                timestamp: docu.data().timestamp,
+                postid: docu.data().postid
+            });
+            
+        });
+        
+//        console.log(messages);
+        dataloadcounter++;
+        makemessagelist();
+
+    })
+    .catch(error => {
+        console.log(error.message);
+});
+
+function makemessagelist(){
+
+    if(dataloadcounter < 4)
+    return;
+
+    maincontainer.innerHTML = "";
+    console.log("Making list....")
+    messages.forEach((value,key) => {
+
+        if(value.receiverid === currentUser.uid)
+        {
+            let username = users.get(value.senderid) ? users.get(value.senderid).username : "";
+            let title = posts.get(value.postid) ? posts.get(value.postid).title : "";
+            
+            let chatcontainer = document.createElement("div");
+            chatcontainer.innerHTML += `
+            User: ${username} || Title: ${title} <br>
+            Message: ${value.message} || ${value.timestamp} <br>
+            <input type="text">  
+            <input type="button" value="Reply"> <br><br>
+            `;
+
+            maincontainer.appendChild(chatcontainer);
+       }
+
+    })
+}
+
+getDocs(userColRef)
+    .then((snapshot) => {
+        snapshot.docs.forEach((docu) => {
+
+            users.set(docu.data().userid, {
+                username: docu.data().userName
+            });
+        });
+        dataloadcounter++;
+        makemessagelist();
+//        console.log(users);
+    })
+    .catch(error => {
+        console.log(error.message);
+});
+
+getDocs(postColRef)
+    .then((snapshot) => {
+        snapshot.docs.forEach((docu) => {
+
+            posts.set(docu.id, {
+                title: docu.data().title
+            });
+        });
+        dataloadcounter++;
+        makemessagelist();
+//        console.log(posts);
+    })
+    .catch(error => {
+        console.log(error.message);
+});

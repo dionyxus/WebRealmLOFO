@@ -62,10 +62,11 @@ function makePostGrid(postList ,postView){
 
     postList.forEach((post) => {
 
-        postView.innerHTML += "" + //doc.data().title + "</br>" + doc.data().description + "</br>";
-        `<div class="item  col-xs-3 col-lg-3">
-            <div class="thumbnail" id="${post.id}">
-                <img class="group list-group-image" src="${post.imageURL}" alt="" /> //docu.data().imageURL
+        let postcontainer = document.createElement("div");
+        postcontainer.setAttribute("class",`item  col-xs-3 col-lg-3 `);
+        postcontainer.innerHTML += `
+            <div class="thumbnail" id="${post.postid}">
+                <img class="group list-group-image" src="${post.imageURL}" alt="" />
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading">
                         ${post.title}</h4>
@@ -74,27 +75,24 @@ function makePostGrid(postList ,postView){
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <p class="lead">
-                                ${ 
-                                    post.possiblelostdatetime
-                                    //docu.data().username
-                                 }</p>
+                                ${ post.possiblelostdatetime}</p>
                         </div>
                     </div>
                 </div>
                 </div>
             </div>`
             ;
-            let griditem = document.getElementById(post.id);
+
+            postview.appendChild(postcontainer);
+
+            let griditem = document.getElementById(post.postid);
 
             if(griditem){
-//                        console.log("Grid Item found" + docu.id);
-                griditem.myparam = post.id;
+                griditem.myparam = post.postid;
 
                 griditem.addEventListener('click',(e)=>{
-//                            console.log(e.currentTarget.myparam);
-                    localStorage.setItem("viewpostdocid",e.currentTarget.myparam);
-
-                    window.open('#viewpost',"_self");
+                localStorage.setItem("viewpostdocid",e.currentTarget.myparam);
+                window.open('#viewpost',"_self");
                 });
             }
 

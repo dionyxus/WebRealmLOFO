@@ -21,7 +21,7 @@ measurementId: "G-ZZH3G9HQHW"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
-const colRef = collection(db, 'Posts');
+const postColRef = collection(db, 'Posts');
 
 const userColRef = collection(db, 'Users');
 
@@ -75,7 +75,7 @@ submitpostbutton.addEventListener('click', (e) => {
                                         .then((url) => {
                                         console.log(url);
 
-                                        addDoc(colRef, {
+                                        addDoc(postColRef, {
                                                 islost: lostRadioButton.checked,
                                                 isfound: foundRadioButton.checked,
                                                 title: title.value,
@@ -95,6 +95,21 @@ submitpostbutton.addEventListener('click', (e) => {
                                                 console.log(error.message);
                                         })      
                 
+
+                                        addDoc(userColRef, {
+                                                userid: user.uid,
+                                                userName: user.displayName,
+                                                useremailid: user.email,
+                                                userPhoto: user.photoURL,
+                                                userContactNo: user.phoneNumber
+                                            })
+                                            .then(() => {
+                                                    console.log("User Added");
+                                            })
+                                            .catch((error) => {
+                                                    console.log(error.message);
+                                            }); 
+
 
                                         })
                                         .catch((error) => {
@@ -116,9 +131,9 @@ submitpostbutton.addEventListener('click', (e) => {
                             // The signed-in user info.
                             user = result.user;
             
-                                db.collection("Users").doc(user.uid).set({
-                                        userName: user.displayName
-                                });    
+                                // db.collection("Users").doc(user.uid).set({
+                                //         userName: user.displayName
+                                // });    
 
                             console.log(user);
                             // ...
