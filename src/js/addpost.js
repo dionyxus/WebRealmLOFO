@@ -30,6 +30,10 @@ const auth = getAuth();
 
 const storage = getStorage();
 
+video.style.display = "none";
+canvas.style.display = "none";
+
+let isCaptureImage = false;
 
 console.log("Slim Shady Posting.....");
 
@@ -53,15 +57,12 @@ submitpostbutton.addEventListener('click', (e) => {
                         let file;
                         let storageRef;
 
-                        if(captureCheckbox.checked){
-                                // TODO add check for image capture
+                        if(isCaptureImage){
                                 storageRef = ref(storage, `ItemImages/${Date.now()}.jpg}`);
                                 file = jpegBlob;
-
                         }else{
-                                file = document.getElementById('itemimage').files[0];
+                                file = document.getElementById('uploadimage').files[0];
                                 storageRef = ref(storage, `ItemImages/${file.name}`);
-
                         }
 
 
@@ -90,6 +91,7 @@ submitpostbutton.addEventListener('click', (e) => {
                                         .then(() => {
                                                 console.log("Post Submitted");
                                                 postForm1.reset();
+                                                alert("Post Submitted!");
                                         })
                                         .catch((error) => {
                                                 console.log(error.message);
@@ -150,6 +152,7 @@ submitpostbutton.addEventListener('click', (e) => {
                 }
         
         });
+
 });
 
 
@@ -164,6 +167,8 @@ document.getElementById('start').addEventListener('click', function () {
           navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
             //video.src = window.URL.createObjectURL(stream);
             video.srcObject = stream;
+            video.style.display = "block";
+            itemimage.style.display = "none";
             // video.play();  // or autplay
           });
         } else {
@@ -186,6 +191,14 @@ document.getElementById('snap').addEventListener('click', () => {
         //Stop Cam
         const tracks = video.srcObject.getTracks();
         tracks.forEach((track) => track.stop());
+
+        itemimage.setAttribute( "src", jpegFile);
+
+        video.style.display = "none";
+        canvas.style.display = "none";
+        itemimage.style.display = "block";
+
+        isCaptureImage = true;
 
       });
 
@@ -212,3 +225,13 @@ document.getElementById('snap').addEventListener('click', () => {
 
           return new Blob(byteArrays, {type: mime});
       }
+
+
+uploadimage.addEventListener('change',(e) => {
+        e.preventDefault();
+
+        console.log("Upload init");
+        itemimage.setAttribute( "src", URL.createObjectURL(uploadimage.files[0]));
+
+        isCaptureImage = false;
+})

@@ -87,23 +87,28 @@
 
                 <tr>
                 <td><h3><label for="myfile">Capture or Upload Photo: </label></h3>
-                <input type="file" id="itemimage" name="myfile"><br><br></td>
+                <input type="file" id="uploadimage" name="myfile"><br><br></td>
                 </tr>
-                
+              <!-- 
                 <tr>
                   <td>
                     <input type="checkbox" id="captureCheckbox">
                   </td>
                 </tr>
-
+-->
                   <tr>
                     <td>
 
                       <button id="start">Start Camera</button>
                       <button id="snap">Snap Photo</button>
 
-                    <video id="video" width="320" height="240" autoplay></video>                
-                    <canvas id="canvas" width="320" height="240"></canvas>
+                      <div>
+                        <img id="itemimage" src="/images/CameraIcon.jpeg" width="320" height="240">
+                        <video id="video" width="320" height="240" autoplay></video>                
+                        <canvas id="canvas" width="320" height="240"></canvas>
+                      </div>
+
+                    
 
                     </td>
                     </tr>
