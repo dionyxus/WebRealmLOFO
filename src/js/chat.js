@@ -90,11 +90,39 @@ function makemessagelist(){
             chatcontainer.innerHTML += `
             User: ${username} || Title: ${title} <br>
             Message: ${value.message} || ${value.timestamp} <br>
-            <input type="text">  
-            <input type="button" value="Reply"> <br><br>
+            <input type="text" id="${key}_textinput">  
+            <input type="button" value="Reply" id="${key}_button"> <br><br>
             `;
 
             maincontainer.appendChild(chatcontainer);
+
+            let replyButton = document.getElementById(key + "_button");
+
+            if(replyButton){
+                replyButton.myparam = {key,value};
+
+                replyButton.addEventListener("click", (e) => {
+                    let messageObj = e.currentTarget.myparam;
+                //console.log(e.currentTarget.myparam);
+                
+                addDoc(messageColRef, {
+                    receiverid: messageObj.value.senderid,
+                    senderid: messageObj.value.receiverid,
+                    postid: messageObj.value.postid,
+                    message: document.getElementById(messageObj.key + "_textinput").value,
+                    timestamp: Date.now()
+                })
+                .then(() => {
+                        console.log("Reply message sent");
+                        alert("Reply message sent");
+                })
+                .catch((error) => {
+                        console.log(error.message);
+                }) 
+                
+                });
+            }
+
        }
 
     })
