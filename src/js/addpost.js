@@ -83,6 +83,7 @@ submitpostbutton.addEventListener('click', (e) => {
                                                 description : desc.value,
                                                 reward: reward.value,
                                                 possiblelostdatetime: possibleLostDateTime.value,
+                                                position: positionObj,
                                                 postcreatedtimestamp: Date.now(),
                                                 userid: user.uid,
                                                 username: user.displayName,
@@ -235,3 +236,31 @@ uploadimage.addEventListener('change',(e) => {
 
         isCaptureImage = false;
 })
+
+let map;
+function initMap() {
+  console.log('Chekc');
+  var latlng = new google.maps.LatLng(49.225693, -123.107326);
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: latlng,
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+  });
+  // google.maps.event.addListener(map, 'click', function (event) {
+  var marker = new google.maps.Marker({
+    position: latlng,
+    map: map,
+    title: 'Place the marker for your location!',
+    draggable: true,
+  });
+  google.maps.event.addListener(marker, 'dragend', function (a) {
+    console.log('a', a);
+    positionObj = {
+      lat: a.latLng.lat(),
+      lng: a.latLng.lng(),
+    };
+    console.log('positionObj', positionObj);
+  });
+}
+
+initMap();

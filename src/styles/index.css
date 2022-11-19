@@ -1,52 +1,11 @@
-/*
-body {
-    background: white;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  h1 {
-    color: #bdbdbd;
-    font-weight: 300;
-  }
-  
-  .toolbar {
-    position: sticky;
-    height: 3em;
-    background-color: grey;
-    border: 2px;
-    color: #eee;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .toolbar a {
-    background-color: white;
-    text-decoration: none;
-    color: black;
-    height: 1.2em;
-    flex: 0 0 5em;
-    margin: 0.5rem;
-    padding: 0.5rem;
-    text-align: center;
-  }
-  .toolbar a:active {
-    background-color: black;
-    color: #fff;
-    border: 1px solid #fff;
-  }
-  
-  #mainArea {
-    padding: 2em;
-  }
-  */
+
 
   body {
+    font-family:'Montserrat', sans-serif;
     background: white;
-    height: 100vh;
-    margin-left:150px;
-    margin-right:150px;
+    margin: 0px;
   }
+
   .navibar{
     background-color: grey;
   }
@@ -94,17 +53,17 @@ body {
   }
 
   
-  #mainArea {
+  /* #mainArea {
     padding: 2em;
-  }
+  } */
   .footer{
     min-height: 100px;
     background-color: #111;
     height: auto !important;
     height: 100%;
-
     margin: 0 auto -4em;
   }
+
   .center {
     display: block;
     margin-left: auto;
@@ -115,4 +74,11 @@ body {
     color: #bdbdbd;
     font-size: small;
 
+  }
+
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
   }
