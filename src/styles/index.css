@@ -94,9 +94,9 @@ body {
   }
 
   
-  #mainArea {
-    padding: 2em;
-  }
+  /* #mainArea {
+    padding: 2em; 
+  } */
   .footer{
     min-height: 100px;
     background-color: #111;
