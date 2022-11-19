@@ -77,19 +77,26 @@ function makemessagelist(){
     if(dataloadcounter < 4)
     return;
 
+    let sortedMessages = new Map([...messages.entries()].sort((a,b) =>
+        b[1].timestamp - a[1].timestamp
+    ));
+
     maincontainer.innerHTML = "";
     console.log("Making list....")
-    messages.forEach((value,key) => {
+    sortedMessages.forEach((value,key) => {
 
         if(value.receiverid === currentUser.uid)
         {
             let username = users.get(value.senderid) ? users.get(value.senderid).username : "";
             let title = posts.get(value.postid) ? posts.get(value.postid).title : "";
             
+            let datetime = new Date(value.timestamp);
+            let datetimestring = datetime.toDateString().substring(4) + " - " + datetime.getHours()+":"+datetime.getMinutes();
+
             let chatcontainer = document.createElement("div");
             chatcontainer.innerHTML += `
             User: ${username} || Title: ${title} <br>
-            Message: ${value.message} || ${value.timestamp} <br>
+            Message: ${value.message} || ${datetimestring} <br>
             <input type="text" id="${key}_textinput">  
             <input type="button" value="Reply" id="${key}_button"> <br><br>
             `;
