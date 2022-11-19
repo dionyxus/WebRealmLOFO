@@ -1,4 +1,4 @@
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
 
                 input[type=text], textarea {
@@ -93,13 +93,13 @@
                 <td><h3><label for="myfile">Capture or Upload Photo: </label></h3>
                 <input type="file" id="uploadimage" name="myfile"><br><br></td>
                 </tr>
-              <!-- 
+             
                 <tr>
                   <td>
                     <input type="checkbox" id="captureCheckbox">
                   </td>
                 </tr>
--->
+
                   <tr>
                     <td>
 
@@ -107,9 +107,9 @@
                       <button id="snap">Snap Photo</button>
 
                       <div>
-                        <img id="itemimage" src="/images/CameraIcon.jpeg" width="320" height="240">
-                        <video id="video" width="320" height="240" autoplay></video>                
-                        <canvas id="canvas" width="320" height="240"></canvas>
+                        <img id="itemimage" src="/images/CameraIcon.jpeg" width="150" height="100">
+                        <video id="video" width="150" height="100" autoplay></video>                
+                        <canvas id="canvas" width="150" height="100"></canvas>
                       </div>
 
                     
@@ -154,4 +154,378 @@
 
         </div>
 
-      </body>
+      </body> -->
+      <!-- <style>
+        /* Style inputs, select elements and textareas */
+    input[type=text],  textarea{
+      width: 50%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    
+    /* Style the label to display next to the inputs */
+    label {
+      padding: 12px 12px 12px 0;
+      display: inline-block;
+    }
+    
+    /* Style the submit button */
+    input[type=submit] {
+      background-color: #04AA6D;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      width:25%;
+      cursor: pointer;
+      float: left;
+    
+    }
+    /* .details {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 100px;
+      } */
+    
+    /* Style the container */
+    .container {
+      border-radius: 5px;
+      background-color: #6b6969;
+      padding: 20px;
+    }
+    
+    /* Floating column for labels: 25% width */
+    .col-25 {
+      /* float: left; */
+      width: 25%;
+      margin-top: 6px;
+    }
+    
+    /* Floating column for inputs: 75% width */
+    .col-75 {
+      /* float: center; */
+      width: 50%;
+      margin-top: 6px;
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+      .col-25, .col-75{
+        width: 150%;
+        margin-top: 0;
+      }
+    }
+    @media screen and (max-width: 600px) {
+       input[type=submit] {
+        width: 50%;
+        margin-top: 5px;
+        float:left
+      }
+    }
+    </style>
+    
+    <div class="container">
+      <form action="action_page.php">
+        <h1 style="color:white">New post</h1><hr class="line">
+        <div class="options">
+          <div class="row">
+            <div class="lostfound">
+              <label for="lostRadioButton">Lost</label>
+              <input type="radio" id="lostRadioButton" name="lost" value="lost">
+    
+    
+              <label for="foundRadioButton">Found</label>
+              <input type="radio" id="foundRadioButton" name="found" value="found">
+            </div>
+          </div>
+    
+          <div class="row">
+            <div >
+              <h3><label for="myfile">Geolocation: </label></h3>
+            </div>
+    
+            <div>
+              <h3><label for="myfile">Capture or Upload Photo: </label></h3>
+    
+            </div>
+            <div>
+              <input type="file" id="uploadimage" name="myfile">
+            </div>
+    
+            <div>
+          <button id="start">Start Camera</button>
+          <button id="snap">Snap Photo</button>
+    
+            </div>
+            <div>
+            <img id="itemimage" src="/images/CameraIcon.jpeg" width="150" height="100">
+            <video id="video" width="150" height="100" autoplay></video>                
+            <canvas id="canvas" width="150" height="100"></canvas>
+          </div>
+        </div>
+        <div class="details">
+          <div class="row">
+            <div class="col-25">
+              <label for="title">Post Title:</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="title" name="title" placeholder="Title">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="Description">description</label>
+            </div>
+            <div class="col-75">
+              <textarea type="text" rows="3" id="desc" cols="40" name="Description" placeholder="Enter text" required></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="reward"> Reward</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="reward" cols="40" name="Reward" placeholder="Enter Reward(Optional)" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="lostTime">Possible Lost Date/Time </label>
+            </div>
+            <div class="col-75">
+              <input type="datetime-local" id="possibleLostDateTime" name="lostTime" placeholder="Lost Date/Time" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="sub">
+            <input type="submit" value="Submit">
+        </div>
+        </div>
+    
+      </form>
+    </div> -->
+    <style>
+      .formwrap {
+        background: #5a5957;
+        padding: 10px 15px;
+      }
+    
+      .container {
+        max-width: 1300px;
+        margin: 0 auto;
+      }
+    
+      .formphotos label {
+        font-size: 18px;
+        color: #fff;
+      }
+    
+      h1 {
+        font-size: 36px;
+        font-weight: 700;
+        border-bottom: 2px solid #df6536;
+        padding-bottom: 10px;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+        color: #df6536;
+      }
+    
+      .addpostview {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 100px;
+      }
+    
+      .addpostview h4 {
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        margin: 5px 0 15px;
+      }
+    
+      #map {
+        height: 250px;
+        width: 100%;
+        border: 1px solid #000000;
+        border-radius: 4px;
+      }
+    
+      #itemimage {
+        width: 75%;
+        border-radius: 15px;
+        margin-top: 80;
+        margin-left: 20;
+      }
+      /* .imagebuttons {
+        margin-top: -100;
+        float: left;
+    } */
+    
+      .camerabuttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 0.5fr));
+        /* gap: -50px; */
+        align-items: center;
+      }
+    
+      .camerabuttons button {
+        padding: 5px 10px;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        background: #fff;
+        border: 1px solid #fff;
+        border-radius: 4px;
+      }
+    
+      .camerabuttons h4 {
+        margin: 15px;
+      }
+    
+      #uploadimage {
+        font-size: 17px;
+      }
+    
+      .formdetail input[type='text'] {
+        width: 75%;
+        padding: 10px 15px;
+        font-size: 18px;
+        background: transparent;
+        border: 1px solid #ffffff;
+        color: white;
+        border-radius: 4px;
+      }
+    
+      .formdetail textarea {
+        width: 75%;
+        padding: 10px 15px;
+        font-size: 18px;
+        background: transparent;
+        border: 1px solid #ffffff;
+        color: white;
+        border-radius: 4px;
+      }
+    
+      .formdetail input[type='datetime-local'] {
+        width: 75%;
+        padding: 10px 15px;
+        font-size: 18px;
+        background: transparent;
+        border: 1px solid #ffffff;
+        color: white;
+        border-radius: 4px;
+      }
+    
+      .formdetail h4 {
+        margin: 5px 0 15px;
+      }
+    
+      #submitpostbutton {
+        width: 85%;
+        padding: 15px;
+        font-size: 20px;
+        background: #df6536;
+        border-radius: 4px;
+        border: 0px;
+        color: #fff;
+        margin-top: 30px;
+        float: center;
+      }
+    
+      @media (max-width: 770px) {
+        .addpostview {
+          display: grid;
+          grid-template-columns: repeat(1, minmax(0, 1fr));
+          gap: 30px;
+        }
+    
+        .camerabuttons button {
+          display: inline-block;
+          width: 50%;
+          margin-top: 10px;
+          margin-bottom: 5px;
+        }
+      }
+    </style>
+    
+    <section class="formwrap">
+      <div class="container">
+        <div id="title"><h1>New post</h1></div>
+        <form action="action_page.php">
+          <div class="addpostview">
+            <div class="formphotos">
+              <h4>Choose item type</h4>
+              <label for="lostRadioButton">Lost</label>
+              <input type="radio" id="lostRadioButton" name="lost" value="lost" />
+              <label for="foundRadioButton">Found</label>
+              <input type="radio" id="foundRadioButton" name="lost" value="found" />
+              <h4>Mark your location</h4>
+              <div id="map"></div>
+    
+              <div class="formimage">
+                <h4>Capture or Upload Photo</h4>
+    
+                <div class="camerabuttons">
+                  <div class="imageview">
+                    <img id="itemimage" src="/images/CameraIcon.jpeg" />
+                    <video id="video" width="100" height="100" autoplay></video>
+                    <canvas id="canvas" width="100" height="100"></canvas>
+                  </div>
+                  <div class="imagebuttons">
+                    <input type="file" id="uploadimage" name="myfile" />
+                    <h4>or</h4>
+                    <button id="start">Start Camera</button>
+                    <button id="snap">Snap Photo</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="formdetail">
+              <h4>Post Title</h4>
+              <input type="text" id="title" name="title" placeholder="Title" />
+    
+              <h4>Description</h4>
+    
+              <textarea
+                type="text"
+                rows="6"
+                id="desc"
+                cols="50"
+                name="Description"
+                placeholder="Enter text"
+              ></textarea>
+              <h4>Reward</h4>
+    
+              <input
+                type="text"
+                id="reward"
+                cols="40"
+                name="Reward"
+                placeholder="Enter Reward(Optional)"
+                required
+              />
+              <h4>Possible Lost Date/Time</h4>
+    
+              <input
+                type="datetime-local"
+                id="possibleLostDateTime"
+                name="lostTime"
+                placeholder="Lost Date/Time"
+                required
+              />
+              <input type="submit" id="submitpostbutton" value="Submit" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>

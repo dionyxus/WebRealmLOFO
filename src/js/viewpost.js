@@ -43,11 +43,11 @@ async function getData (coll, id) {
   getData("Posts",localStorage.getItem("viewpostdocid") ).then((data)=>{
   //  console.log(data);
     
-    document.getElementById("title").innerHTML = data.title;
-    document.getElementById("desc").innerHTML = "Description - " + data.description;
-    document.getElementById("username").innerHTML = "User Name - " + data.username;
-    document.getElementById("reward").innerHTML = "Reward - " + data.reward;
-    document.getElementById("datetime").innerHTML = "Possible Lost Date/Time - " + data.possiblelostdatetime;
+  document.getElementById("title").innerHTML = data.title;
+  document.getElementById("desc").innerHTML =  data.description;
+  document.getElementById("username").innerHTML = "<span>Post Owner</span>" + data.username;
+  document.getElementById("reward").innerHTML = "<span>Reward:</span> " + data.reward;
+  document.getElementById("datetime").innerHTML = "<span>Date/Time:</span> " + data.possiblelostdatetime;
 
     itemimage.src = data.imageURL;
 
