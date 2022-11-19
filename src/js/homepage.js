@@ -60,9 +60,16 @@ getDocs(colRef)
 
 function makePostGrid(postList ,postView){
 
-    postList.forEach((post) => {
+    let sortedPostList = postList.sort((a,b) =>
+        b.postcreatedtimestamp - a.postcreatedtimestamp
+    );
 
-        let postcontainer = document.createElement("div");
+    sortedPostList.forEach((post) => {
+
+        let postdatetime = new Date(post.postcreatedtimestamp);
+        let postdatetimestring = postdatetime.toDateString().substring(4) + " - " + postdatetime.getHours()+":"+postdatetime.getMinutes();
+
+        let postcontainer = document.createElement("div"); //${post.imageURL}
         postcontainer.setAttribute("class",`item  col-xs-3 col-lg-3 `);
         postcontainer.innerHTML += `
             <div class="thumbnail" id="${post.postid}">
@@ -75,7 +82,7 @@ function makePostGrid(postList ,postView){
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <p class="lead">
-                                ${ post.possiblelostdatetime}</p>
+                                ${postdatetimestring}</p>
                         </div>
                     </div>
                 </div>
