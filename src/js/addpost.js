@@ -35,6 +35,8 @@ canvas.style.display = "none";
 
 let isCaptureImage = false;
 
+let positionObj = {};
+
 console.log("Slim Shady Posting.....");
 
 const user = auth.currentUser;
@@ -58,7 +60,7 @@ submitpostbutton.addEventListener('click', (e) => {
                         let storageRef;
 
                         if(isCaptureImage){
-                                storageRef = ref(storage, `ItemImages/${Date.now()}.jpg}`);
+                                storageRef = ref(storage, `ItemImages/${Date.now()}.jpg`);
                                 file = jpegBlob;
                         }else{
                                 file = document.getElementById('uploadimage').files[0];
@@ -74,9 +76,11 @@ submitpostbutton.addEventListener('click', (e) => {
 
                                 getDownloadURL(storageRef)
                                         .then((url) => {
+
                                         console.log(url);
 
                                         addDoc(postColRef, {
+                                                
                                                 islost: lostRadioButton.checked,
                                                 isfound: foundRadioButton.checked,
                                                 title: title.value,
@@ -88,6 +92,7 @@ submitpostbutton.addEventListener('click', (e) => {
                                                 userid: user.uid,
                                                 username: user.displayName,
                                                 imageURL: url 
+                                                
                                         })
                                         .then(() => {
                                                 console.log("Post Submitted");
@@ -97,7 +102,6 @@ submitpostbutton.addEventListener('click', (e) => {
                                         .catch((error) => {
                                                 console.log(error.message);
                                         })      
-                
 
                                         addDoc(userColRef, {
                                                 userid: user.uid,
