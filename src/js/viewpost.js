@@ -50,13 +50,36 @@ async function getData (coll, id) {
   document.getElementById("desc").innerHTML =  data.description;
   document.getElementById("username").innerHTML = "<span>Post Owner</span>" + data.username;
   document.getElementById("reward").innerHTML = "<span>Reward:</span> " + data.reward;
-  document.getElementById("datetime").innerHTML = "<span>Date/Time:</span> " + postdatetimestring;
+  document.getElementById("datetime").innerHTML = "<span>Date:</span> " + postdatetimestring;
 
     itemimage.src = data.imageURL;
 
     postuserid = data.userid;
 
+    let map;
+  function initMap() {
+    
+
+  
+    // let position = postsData.map((item) => item.position);
+    // console.log('position', position);
+    // The location of Uluru
+    // const uluru = { lat: filterpost.position.lat, lng: filterpost.position.lng };
+    // // The map, centered at Uluru
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 20,
+      center: data.position,
+    });
+    // // The marker, positioned at Uluru
+    new google.maps.Marker({
+      position: data.position,
+      map,
+    });
+  }
+  initMap();
   });
+
+
 
 
   const messageColRef = collection(db, 'Messages');
