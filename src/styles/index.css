@@ -6,8 +6,26 @@
     margin: 0px;
   }
 
+  header {
+    background-color: #111;
+  }
+
   .navibar{
     background-color: grey;
+  }
+
+  .toolbar ul {
+    margin: 0px;
+    padding: 15px;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
   }
 
 .navli li a{
@@ -22,14 +40,16 @@
     color: #bdbdbd;
     font-weight: 300;
   }
-  ul {
+
+  .toolbar {
     list-style-type: none;
-    margin: 0;
+    
     
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    
   }
+
   .floatright{
     float: right;
   }
@@ -38,6 +58,17 @@
     float: left;
 /*    margin-left: 200px;
 */
+  }
+
+  .defaultbutton {
+    color: white;
+    background: orangered;
+    padding: 10px 30px;
+    font-size: 22px;
+    border-radius: 4px;
+    border: 2px solid orangered;
+    display: inline-block;
+    text-decoration: none ;
   }
   
   li a {
@@ -63,6 +94,7 @@
     margin: 0 auto -4em;
   }
 
+
   .center {
     display: block;
     margin-left: auto;
@@ -80,4 +112,31 @@
   }
   *, *:before, *:after {
     box-sizing: inherit;
+  }
+
+  @media (max-width: 770px) {
+    .toolbar ul {
+      text-align: center;
+    }
+
+    .toolbar ul li {
+      float: none;
+      display: inline-block;
+    }
+
+    .toolbar ul .floatright {
+      float: none;
+    }
+
+    .toolbar ul .sitelogo{
+      width: 100%;
+    }
+
+    .toolbar li a {
+      padding: 14px 5px;
+    }
+
+    .toolbar ul {
+      padding: 15px 5px;
+    }
   }

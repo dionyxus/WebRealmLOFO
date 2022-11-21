@@ -1,336 +1,21 @@
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <style>
 
-                input[type=text], textarea {
-                  width: 100%;
-                  padding: 12px 20px;
-                  margin: 8px 0;
-                  display: inline-block;
-                  border: 1px solid #ccc;
-                  border-radius: 4px;
-                  box-sizing: border-box;
-                  
-                  
-                }
-                label{
-                  color: white;
-                }
-                #form1{
-                  float:center;
-                  position:relative;
-                   left:200px;
-                }
-                #postForm2{
-
-                  padding: 30px 30px;
-        
-                  margin-left: auto;
-                  position:relative;
-                   left:320px;
-                    top:-330px;
-                }
-                
-                input[type=submit] {
-                  width: 100%;
-                  background-color: #5b5656;
-                  color: white;
-                  padding: 14px 20px;
-                  margin: 8px 0;
-                  border-color:white ;
-                  border-radius: 10px;
-                  cursor: pointer;
-                  position:relative;
-                   left:250px;
-                    top:-300px;
-                }
-                
-                input[type=submit]:hover {
-                  background-color: #df6436;
-                }
-                
-                div {
-                  border-radius: 5px;
-                  background-color: #5b5656;
-                }
-                hr.line{
-                  border-color: #df6436;
-                }
-
-
-
-                </style>
-
-                  <h1 style="color:white">New post</h1><hr class="line">
-
-      <div style="width:60%; float: center;">
-        
-        <table id="form1">
-          <tr>
-          <th>
-        <h3 style="color: white;margin: 15px; ">Choose your status:</h3></th></tr>
-
-              <form id="postForm1"> 
-
-                <tr>
-                <td><input type="radio" id="lostRadioButton" name="lost" value="lost">
-                <label for="lostRadioButton">Lost</label>
-                <br></td>
-                </tr>
-                
-                <tr>
-                <td>
-                <input type="radio" id="foundRadioButton" name="found" value="found">
-                <label for="foundRadioButton">Found</label> <br><br></td>
-                </tr>
-                
-                <tr>
-
-                  <td><h3><label for="myfile">Geolocation: </label></h3>
-
-                </tr>
-
-                <tr>
-                <td><h3><label for="myfile">Capture or Upload Photo: </label></h3>
-                <input type="file" id="uploadimage" name="myfile"><br><br></td>
-                </tr>
-             
-                <tr>
-                  <td>
-                    <input type="checkbox" id="captureCheckbox">
-                  </td>
-                </tr>
-
-                  <tr>
-                    <td>
-
-                      <button id="start">Start Camera</button>
-                      <button id="snap">Snap Photo</button>
-
-                      <div>
-                        <img id="itemimage" src="/images/CameraIcon.jpeg" width="150" height="100">
-                        <video id="video" width="150" height="100" autoplay></video>                
-                        <canvas id="canvas" width="150" height="100"></canvas>
-                      </div>
-
-                    
-
-                    </td>
-                    </tr>
-
-                </table>
-
-
-                
-
-                <table id="postForm2"  style="float:end;">
-                <tr>
-                  <th>
-                <h3 style="color:white">Write item details:</h3></th></tr>
-                <tr>
-                <td>
-                <label for="title">Post title</label>
-                <input type="text" name="title" placeholder="Title" id="title" required></td></tr>
-                <tr><td>
-                <label for="Description">Description</label>
-                <textarea type="text" rows="3" id="desc" cols="40" name="Description" placeholder="Enter text" required></textarea>
-                </td></tr>
-                <tr><td>
-                <label for="reward">Reward</label>
-                <input type="text" id="reward" cols="40" name="Reward" placeholder="Enter Reward(Optional)" required></input>
-                </td></tr>
-                <tr><td>
-                <label for="lostTime">Possible Lost Date/Time </label>
-                <input type="datetime-local" id="possibleLostDateTime" name="lostTime" placeholder="Lost Date/Time" required>
-                
-                <br><br>
-               </td>
-                </tr>
-                </table>
-
-
-    
-              <input type="submit" id="submitpostbutton" value="Submit">
-              </form>
-
-        </div>
-
-      </body> -->
-      <!-- <style>
-        /* Style inputs, select elements and textareas */
-    input[type=text],  textarea{
-      width: 50%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      resize: vertical;
-    }
-    
-    /* Style the label to display next to the inputs */
-    label {
-      padding: 12px 12px 12px 0;
-      display: inline-block;
-    }
-    
-    /* Style the submit button */
-    input[type=submit] {
-      background-color: #04AA6D;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 4px;
-      width:25%;
-      cursor: pointer;
-      float: left;
-    
-    }
-    /* .details {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 100px;
-      } */
-    
-    /* Style the container */
-    .container {
-      border-radius: 5px;
-      background-color: #6b6969;
-      padding: 20px;
-    }
-    
-    /* Floating column for labels: 25% width */
-    .col-25 {
-      /* float: left; */
-      width: 25%;
-      margin-top: 6px;
-    }
-    
-    /* Floating column for inputs: 75% width */
-    .col-75 {
-      /* float: center; */
-      width: 50%;
-      margin-top: 6px;
-    }
-    
-    /* Clear floats after the columns */
-    .row:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-    
-    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-    @media screen and (max-width: 600px) {
-      .col-25, .col-75{
-        width: 150%;
-        margin-top: 0;
-      }
-    }
-    @media screen and (max-width: 600px) {
-       input[type=submit] {
-        width: 50%;
-        margin-top: 5px;
-        float:left
-      }
-    }
-    </style>
-    
-    <div class="container">
-      <form action="action_page.php">
-        <h1 style="color:white">New post</h1><hr class="line">
-        <div class="options">
-          <div class="row">
-            <div class="lostfound">
-              <label for="lostRadioButton">Lost</label>
-              <input type="radio" id="lostRadioButton" name="lost" value="lost">
-    
-    
-              <label for="foundRadioButton">Found</label>
-              <input type="radio" id="foundRadioButton" name="found" value="found">
-            </div>
-          </div>
-    
-          <div class="row">
-            <div >
-              <h3><label for="myfile">Geolocation: </label></h3>
-            </div>
-    
-            <div>
-              <h3><label for="myfile">Capture or Upload Photo: </label></h3>
-    
-            </div>
-            <div>
-              <input type="file" id="uploadimage" name="myfile">
-            </div>
-    
-            <div>
-          <button id="start">Start Camera</button>
-          <button id="snap">Snap Photo</button>
-    
-            </div>
-            <div>
-            <img id="itemimage" src="/images/CameraIcon.jpeg" width="150" height="100">
-            <video id="video" width="150" height="100" autoplay></video>                
-            <canvas id="canvas" width="150" height="100"></canvas>
-          </div>
-        </div>
-        <div class="details">
-          <div class="row">
-            <div class="col-25">
-              <label for="title">Post Title:</label>
-            </div>
-            <div class="col-75">
-              <input type="text" id="title" name="title" placeholder="Title">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-25">
-              <label for="Description">description</label>
-            </div>
-            <div class="col-75">
-              <textarea type="text" rows="3" id="desc" cols="40" name="Description" placeholder="Enter text" required></textarea>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-25">
-              <label for="reward"> Reward</label>
-            </div>
-            <div class="col-75">
-              <input type="text" id="reward" cols="40" name="Reward" placeholder="Enter Reward(Optional)" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-25">
-              <label for="lostTime">Possible Lost Date/Time </label>
-            </div>
-            <div class="col-75">
-              <input type="datetime-local" id="possibleLostDateTime" name="lostTime" placeholder="Lost Date/Time" required>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="sub">
-            <input type="submit" value="Submit">
-        </div>
-        </div>
-    
-      </form>
-    </div> -->
     <style>
       .formwrap {
         background: #5a5957;
         padding: 10px 15px;
       }
     
-      .container {
-        max-width: 1300px;
-        margin: 0 auto;
-      }
-    
       .formphotos label {
         font-size: 18px;
         color: #fff;
       }
-    
+      .formphotos {
+
+        padding-left: 15px;
+      }
+      .formdetail{
+        padding: 10px;
+      }
       h1 {
         font-size: 36px;
         font-weight: 700;
@@ -338,7 +23,7 @@
         padding-bottom: 10px;
         margin-bottom: 50px;
         text-transform: uppercase;
-        color: #df6536;
+        color: #080808;
       }
     
       .addpostview {
@@ -351,7 +36,7 @@
         color: white;
         font-size: 18px;
         font-weight: 600;
-        margin: 5px 0 15px;
+        margin: 20px 0 15px;
       }
     
       #map {
@@ -367,18 +52,24 @@
         margin-top: 80;
         margin-left: 20;
       }
-      /* .imagebuttons {
-        margin-top: -100;
-        float: left;
-    } */
+      .imagebuttons {
+        margin-top: -100px;
+
+    }
     
       .camerabuttons {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 0.5fr));
-        /* gap: -50px; */
+        gap: 50px;
+        
         align-items: center;
+
       }
     
+      .formimage {
+        margin-top: 20px;
+      }
+
       .camerabuttons button {
         padding: 5px 10px;
         font-size: 15px;
@@ -397,27 +88,29 @@
       }
     
       .formdetail input[type='text'] {
-        width: 75%;
+        width: 100%;
         padding: 10px 15px;
         font-size: 18px;
         background: transparent;
         border: 1px solid #ffffff;
         color: white;
         border-radius: 4px;
+        
       }
     
       .formdetail textarea {
-        width: 75%;
+        width: 100%;
         padding: 10px 15px;
         font-size: 18px;
         background: transparent;
         border: 1px solid #ffffff;
         color: white;
         border-radius: 4px;
+       
       }
     
       .formdetail input[type='datetime-local'] {
-        width: 75%;
+        width: 100%;
         padding: 10px 15px;
         font-size: 18px;
         background: transparent;
@@ -425,13 +118,15 @@
         color: white;
         border-radius: 4px;
       }
+
+     
     
-      .formdetail h4 {
+      /* .formdetail h4 {
         margin: 5px 0 15px;
-      }
+      } */
     
       #submitpostbutton {
-        width: 85%;
+        width: 75%;
         padding: 15px;
         font-size: 20px;
         background: #df6536;
@@ -455,13 +150,35 @@
           margin-top: 10px;
           margin-bottom: 5px;
         }
+
+        .camerabuttons {
+	
+	grid-template-columns: repeat(1, minmax(0, 1fr));
+	gap: 15px;
+}
+
+.formdetail input[type='datetime-local'] {
+        width: 100%;
+      }
+
+      .formdetail input[type='text'] {
+        width: 100%;
+      }
+
+      .formdetail textarea {
+        width: 100%;
+      }
+
+      #submitpostbutton {
+        width: 100%
+      }
       }
     </style>
     
     <section class="formwrap">
       <div class="container">
         <div><h1>New post</h1></div>
-        <form action="action_page.php">
+        <form id="postForm1" action="action_page.php">
           <div class="addpostview">
             <div class="formphotos">
               <h4>Choose item type</h4>
@@ -478,8 +195,8 @@
                 <div class="camerabuttons">
                   <div class="imageview">
                     <img id="itemimage" src="/images/CameraIcon.jpeg" />
-                    <video id="video" width="100" height="100" autoplay></video>
-                    <canvas id="canvas" width="100" height="100"></canvas>
+                    <video id="video" width="200" height="300" autoplay></video>
+                    <canvas id="canvas" width="200" height="300"></canvas>
                   </div>
                   <div class="imagebuttons">
                     <input type="file" id="uploadimage" name="myfile" />
