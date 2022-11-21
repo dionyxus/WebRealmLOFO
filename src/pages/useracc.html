@@ -1,8 +1,60 @@
 
-<div>
-    <div id="useraccountcontainer"></div>
-    <br>
-    <img id="userimage" width="600" height="400"> <br>
+ <style>
+    .usercard {
+        width: 750px;
+        margin: 0 auto;
+        border: 1px solid black;
+        border-radius: 4px;
+        box-shadow: 0 0 10px 2px rgba(0,0,0,0,0.25);
+        padding: 30px;
+    }
 
-    <input type="button" id="signoutbutton" value="Sign Out">
-</div>
+    .usercard img {
+        height: 200px;
+        width: 200px;
+        border-radius: 100%;
+        border: 2px solid orangered;
+        object-fit: contain;
+        margin: 0px;
+    }
+
+    .usercard {
+        margin: 50px auto;
+        align-items: center;
+        display: flex;
+        gap: 100px;
+        
+    }
+
+    .usercard .defaultbutton {
+        font-size: 16px;
+        font-weight: 300;
+
+    }
+
+    #useraccountcontainer h3{
+        font-size: px;
+        margin: 0 0 25px;
+        font-weight: 400;
+    }
+
+    #useraccountcontainer h3 span {
+        font-weight: 600;
+    }
+ </style>
+
+    <div class="usercard">
+        <div class="userimage"><img id="userimage" width="600" height="400">
+        </div>
+        <div class="usercontent">
+            <div id="useraccountcontainer">
+            </div>
+        
+            <input type="button" id="signoutbutton" class="defaultbutton" value="Sign Out">
+        </div>
+        
+        
+    </div>
+    
+
+   

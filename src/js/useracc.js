@@ -19,9 +19,9 @@ const auth = getAuth();
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        useraccountcontainer.innerHTML += `<h3>User Name - ${user.displayName} </h3>
-        <h4>Email id - ${user.email} </h4>
-        <h4>Contact No - ${user.phoneNumber} </h4>
+        useraccountcontainer.innerHTML += `<h3><span>User Name -</span> ${user.displayName} </h3>
+        <h3><span>Email id -</span> ${user.email} </h3>
+        <h3><span>Contact No -</span> ${user.phoneNumber} </h3>
         `;
 
         userimage.src = user.photoURL;

@@ -1,194 +1,225 @@
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="../styles/homepage.css">
+<link rel="stylesheet" href="../styles/homepage.css" />
+<style>
 
-<div>
+.allposts {
+	padding: 0 0 70px;
+}
+  .bannercontentwrap {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
 
-<div style="background-color:#333; padding-bottom:20px; margin-bottom:20px">
-    <table>
-        <tr> 
-            <td>
-                <p style="padding-top:50px;padding-left:50px; color: white; font-size: 0.5cm;">
-                    Lost or Found something ?
-                </p>
-                <p style="padding-left:50px;color: orange; font-size: 0.7cm;">
-                    We are here to help you
-                </p>
-                <p style="padding-left:50px; color: white; font-size: 0.5cm;" >
-                    join us to create your post
-                </p>
-                <p style="padding-left:50px; color: white; font-size: 0.5cm;">
-                <button style=" background-color: orange; color:white; padding: 10px 24px;">Join</button>
-            </p>
-            </td>
-            <td colspan="3" style="text-align: right; vertical-align: bottom;"><img src="../images/man.png" alt="Avatar" style="width:200px"  ></td>
-        </tr>
-        
-    </table>
-</div>
-<div>
-    <table>
-        <tr>
-            <td></td>
-            <td></td>
-            <td style="float:right; padding-right: 10px;"><button id="clearFilterButton" style="padding: 10px 24px;">Clear Filters</button></td>
-            <td style="float:right; padding-right: 10px;">
-                <button id="lostFilterButton" style="padding: 10px 24px;">Lost</button>
-                </td>
-                <td style="float:right; padding-right: 10px;"><button id="foundFilterButton" style="padding: 10px 24px;">Found</button></td>
-<!--            <td style="float:right; padding-right: 10px;"><button style="padding: 10px 24px;">Date</button></td>              -->
-                <td style="float:right; padding-right: 10px;"><input id="dateFilter" type="date" style="padding: 10px 24px;"></td>
-                <td style="float:right; padding-right: 10px;">
-                <button style="padding: 10px 24px;">Location</button>
+  .banner {
+    background: lightgrey;
+    color: black;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
 
-            </td>
-        </tr>
-    </table>
-</div>
-<h2>Most Recent</h2>
+  .bannerimage {
+    text-align: right;
+  }
 
-<div id="postview" class="row list-group">
-</div>
-<!--
-<table>
-    <tr>
-        <td style="padding-right:45px">
-            <div class="card">
-                <img src="../images/mug.png" alt="Avatar" style="width:200px"  >
-                <div class="container">
-                  <h4><b>mug</b></h4> 
-                  <p>Lost mug in B block</p> 
-                  <p>26 sept</p> 
-                </div>
-              </div>
-        </td>
-        <td style="padding-right:45px">
-            <div class="card">
-                <img src="../images/mug.png" alt="Avatar" style="width:200px">
-                <div class="container">
-                  <h4><b>John Doe</b></h4> 
-                  <p>Architect & Engineer</p> 
-                </div>
-              </div>
-        </td>
-        <td style="padding-right:45px">
-            <div class="card">
-                <img src="../images/mug.png" alt="Avatar" style="width:200px">
-                <div class="container">
-                  <h4><b>John Doe</b></h4> 
-                  <p>Architect & Engineer</p> 
-                </div>
-              </div>
-        </td>
-        <td style="padding-right:45px">
-            <div class="card">
-                <img src="../images/mug.png" alt="Avatar" style="width:200px">
-                <div class="container">
-                  <h4><b>John Doe</b></h4> 
-                  <p>Architect & Engineer</p> 
-                </div>
-              </div>
-        </td>
-        <td style="padding-right:45px">
-            <div class="card">
-                <img src="../images/mug.png" alt="Avatar" style="width:200px">
-                <div class="container">
-                  <h4><b>John Doe</b></h4> 
-                  <p>Architect & Engineer</p> 
-                </div>
-              </div>
-        </td>
-    </tr>
-    </table>
-    
-    -->
+  
 
-    <div style="background-color: lightgray; padding-bottom:20px; margin-bottom:20px">
-        <h2 style="color:white">Lost Items</h2>
-<table>
-    <tr>
-        <td style="padding-right:45px">
-            <div class="card">
-                <img src="../images/mug.png" alt="Avatar" style="width:200px"  >
-                <div class="container">
-                  <h4><b>mug</b></h4> 
-                  <p>Lost mug in B block</p> 
-                </div>
-              </div>
-        </td>
-        <td style="padding-right:45px">
-            <div class="card">
-                <img src="../images/mug.png" alt="Avatar" style="width:200px">
-                <div class="container">
-                  <h4><b>John Doe</b></h4> 
-                  <p>Architect & Engineer</p> 
-                </div>
-              </div>
-        </td>
-        <td style="padding-right:45px">
-            <div class="card">
-                <img src="../images/mug.png" alt="Avatar" style="width:200px">
-                <div class="container">
-                  <h4><b>John Doe</b></h4> 
-                  <p>Architect & Engineer</p> 
-                </div>
-              </div>
-        </td>
-        <td style="padding-right:45px">
-            <div class="card">
-                <img src="../images/mug.png" alt="Avatar" style="width:200px">
-                <div class="container">
-                  <h4><b>John Doe</b></h4> 
-                  <p>Architect & Engineer</p> 
-                </div>
-              </div>
-        </td>
-        <td style="padding-right:45px">
-            <div class="card">
-                <img src="../images/mug.png" alt="Avatar" style="width:200px">
-                <div class="container">
-                  <h4><b>John Doe</b></h4> 
-                  <p>Architect & Engineer</p> 
-                </div>
-              </div>
-        </td>
-    </tr>
-    </table>
+  .banner p {
+	font-size: 40px;
+	margin: 0px 0 15px;
+}
 
+  .banner p span {
+    color: orangered;
+  }
+
+  .banner img {
+    height: 400px;
+  }
+
+  .defaultbutton {
+    color: white;
+    background: orangered;
+    padding: 10px 30px;
+    font-size: 22px;
+    border-radius: 4px;
+    border: 2px solid orangered;
+    display: inline-block;
+    text-decoration: none ;
+  }
+
+  .banner .defaultbutton {
+    margin-top: 20px;
+  }
+
+  .filterbuttons {
+  padding: 30px 0;
+  }
+
+  .filterbuttons input {
+    padding: 10px 24px;
+  }
+  .filterbuttons ul {
+    list-style: none;
+    margin: 0px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0px;
+    gap: 10px;
+  }
+
+  .filterbuttons ul button {
+	padding: 10px 24px;
+	box-shadow: none;
+	border: 1px solid grey;
+	border-radius: 2px;
+}
+
+  .filterbuttons ul button:hover {
+    background-color: orangered;
+    color: white;
+  }
+  .postsgrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 30px;
+  }
+
+.sectiontitle {
+  font-size: 30px;
+  margin: 0px 0 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid orangered;
+  color: black;
+  font-weight: 600;
+}
+
+  .item.singlepost {
+	border: 1px solid black;
+	padding: 10px;
+	border-radius: 4px;
+  box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.25);
+}
+
+.item.singlepost:hover {
+	background: rgba(255,69,0, 0.4);
+}
+
+.item.singlepost:hover h4 {
+	color: white;
+}
+
+.singlepost img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.singlepost h4 {
+	font-size: 18px;
+	font-weight: 400;
+  margin-bottom: 15px;
+  margin-top: 0px;
+}
+
+.singlepost h4:last-child {
+
+  margin-bottom: 0px;
+}
+
+.singlepost h4 span {
+  font-weight: 600;
+}
+
+.caption {
+	padding: 15px 0 5px;
+}
+
+@media (max-width: 770px) {
+  .postsgrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .bannercontentwrap {
+    display: block;
+    padding: 0 15px;
+  }
+
+  .banner img {
+	height: 250px;
+}
+
+  .banner p {
+	font-size: 24px;
+}
+
+.filterbuttons {
+  padding: 30px 15px;
+}
+
+.filterbuttons ul {
+  gap: 5px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .allposts {
+	padding: 0 15px 70px;
+}
+}
+
+@media (max-width: 500px) {
+  .postsgrid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+</style>
+
+<section class="banner">
+  <div class="container">
+    <div class="bannercontentwrap">
+      <div class="bannercontent">
+        <p>Lost or Found something ?</p>
+        <p>
+          <span> We are here to help you</span>
+        </p>
+        <p>Join us to create your post</p>
+
+        <a class="defaultbutton" href="#">Join</a>
+      </div>
+      <div class="bannerimage">
+        <img src="../images/man.png" alt="Avatar" />
+      </div>
     </div>
-    <h2>Found</h2>
-    
-    <table>
-      <tr>
-          <td style="padding-right:45px">
-              <div class="card">
-                  <img src="../images/mug.png" alt="Avatar" style="width:200px"  >
-                  <div class="container">
-                    <h4><b>mug</b></h4> 
-                    <p>Lost mug in B block</p> 
-                  </div>
-                </div>
-          </td>
-          <td style="padding-right:45px">
-              <div class="card">
-                  <img src="../images/mug.png" alt="Avatar" style="width:200px">
-                  <div class="container">
-                    <h4><b>John Doe</b></h4> 
-                    <p>Architect & Engineer</p> 
-                  </div>
-                </div>
-          </td>
-          <td style="padding-right:45px">
-              <div class="card">
-                  <img src="../images/mug.png" alt="Avatar" style="width:200px">
-                  <div class="container">
-                    <h4><b>John Doe</b></h4> 
-                    <p>Architect & Engineer</p> 
-                  </div>
-                </div>
-          </td>
-          </tr>
-          </table>
+  </div>
+</section>
+
+<section class="filterbuttons">
+  <div class="container">
+    <h2 class="sectiontitle">Post Filters</h2>
+    <ul>
+      <li><button id="lostFilterButton">Lost</button></li>
+      <li><button id="foundFilterButton">Found</button></li>
+      <li><button>Date</button></li>
+      <li><input id="dateFilter" type="date" /></li>
+      <li><button>Location</button></li>
+      <li>
+        <button id="clearFilterButton">Clear Filters</button>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="allposts">
+<div class="container">
+  <h2 class="sectiontitle">All posts</h2>
+
+  <div id="postview" class="postsgrid">
+  
+  </div>
 </div>
+</section>
 
 
