@@ -236,10 +236,10 @@ uploadimage.addEventListener('change', (e) => {
 let map;
 function initMap() {
   console.log('Chekc');
-  var latlng = new google.maps.LatLng(49.225693, -123.107326);
+  var latlng = new google.maps.LatLng(49.22397277736316, -123.1080958773155);
   map = new google.maps.Map(document.getElementById('map'), {
     center: latlng,
-    zoom: 15,
+    zoom: 20,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
   });
   // google.maps.event.addListener(map, 'click', function (event) {
