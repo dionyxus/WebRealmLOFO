@@ -3,7 +3,7 @@ console.log("View Single Post page");
 //console.log(localStorage.getItem("viewpostdocid"));
 
 import { initializeApp } from "firebase/app";
-import { documentId, getFirestore, collection, addDoc, doc, getDoc } from "firebase/firestore";
+import { documentId, getFirestore, collection, addDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import { getAuth, signInWithPopup,onAuthStateChanged,GoogleAuthProvider } from "firebase/auth";
 
 
@@ -27,6 +27,7 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
 let postuserid;
+let users = new Map;
 
 async function getData (coll, id) {
     const snap = await getDoc(doc(db, coll, id))
@@ -46,21 +47,20 @@ async function getData (coll, id) {
     let postdatetime = new Date(data.possiblelostdatetime);
     let postdatetimestring = postdatetime.toDateString().substring(4) + " - " + postdatetime.getHours()+":"+postdatetime.getMinutes();
 
-  document.getElementById("title").innerHTML = data.title;
-  document.getElementById("desc").innerHTML =  data.description;
-  document.getElementById("username").innerHTML = "<span>Post Owner</span>" + data.username;
-  document.getElementById("reward").innerHTML = "<span>Reward:</span> " + data.reward;
-  document.getElementById("datetime").innerHTML = "<span>Date:</span> " + postdatetimestring;
+    document.getElementById("title").innerHTML = data.title;
+    document.getElementById("desc").innerHTML =  data.description;
+    document.getElementById("username").innerHTML = "<span>Post Owner</span>" + data.username;
+    document.getElementById("reward").innerHTML = "<span>Reward:</span> " + data.reward;
+    document.getElementById("datetime").innerHTML = "<span>Date:</span> " + postdatetimestring;
 
     itemimage.src = data.imageURL;
 
     postuserid = data.userid;
 
     let map;
+
   function initMap() {
     
-
-  
     // let position = postsData.map((item) => item.position);
     // console.log('position', position);
     // The location of Uluru
@@ -143,3 +143,20 @@ async function getData (coll, id) {
             }
           });
   });
+
+
+getDocs(userColRef)
+    .then((snapshot) => {
+        snapshot.docs.forEach((docu) => {
+
+            users.set(docu.data().userid, {
+                username: docu.data().userName,
+                userphotourl: docu.data().userPhoto 
+            });
+        });
+    })
+    .catch(error => {
+        console.log(error.message);
+});
+
+//postownerimage.src = users.get(postuserid).userphotourl;
