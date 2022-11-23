@@ -1,0 +1,225 @@
+
+<link rel="stylesheet" href="../styles/homepage.css" />
+<style>
+
+.allposts {
+	padding: 0 0 70px;
+}
+  .bannercontentwrap {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+
+  .banner {
+    background: lightgrey;
+    color: black;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .bannerimage {
+    text-align: right;
+  }
+
+  
+
+  .banner p {
+	font-size: 40px;
+	margin: 0px 0 15px;
+}
+
+  .banner p span {
+    color: orangered;
+  }
+
+  .banner img {
+    height: 400px;
+  }
+
+  .defaultbutton {
+    color: white;
+    background: orangered;
+    padding: 10px 30px;
+    font-size: 22px;
+    border-radius: 4px;
+    border: 2px solid orangered;
+    display: inline-block;
+    text-decoration: none ;
+  }
+
+  .banner .defaultbutton {
+    margin-top: 20px;
+  }
+
+  .filterbuttons {
+  padding: 30px 0;
+  }
+
+  .filterbuttons input {
+    padding: 10px 24px;
+  }
+  .filterbuttons ul {
+    list-style: none;
+    margin: 0px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0px;
+    gap: 10px;
+  }
+
+  .filterbuttons ul button {
+	padding: 10px 24px;
+	box-shadow: none;
+	border: 1px solid grey;
+	border-radius: 2px;
+}
+
+  .filterbuttons ul button:hover {
+    background-color: orangered;
+    color: white;
+  }
+  .postsgrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 30px;
+  }
+
+.sectiontitle {
+  font-size: 30px;
+  margin: 0px 0 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid orangered;
+  color: black;
+  font-weight: 600;
+}
+
+  .item.singlepost {
+	border: 1px solid black;
+	padding: 10px;
+	border-radius: 4px;
+  box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.25);
+}
+
+.item.singlepost:hover {
+	background: rgba(255,69,0, 0.4);
+}
+
+.item.singlepost:hover h4 {
+	color: white;
+}
+
+.singlepost img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.singlepost h4 {
+	font-size: 18px;
+	font-weight: 400;
+  margin-bottom: 15px;
+  margin-top: 0px;
+}
+
+.singlepost h4:last-child {
+
+  margin-bottom: 0px;
+}
+
+.singlepost h4 span {
+  font-weight: 600;
+}
+
+.caption {
+	padding: 15px 0 5px;
+}
+
+@media (max-width: 770px) {
+  .postsgrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .bannercontentwrap {
+    display: block;
+    padding: 0 15px;
+  }
+
+  .banner img {
+	height: 250px;
+}
+
+  .banner p {
+	font-size: 24px;
+}
+
+.filterbuttons {
+  padding: 30px 15px;
+}
+
+.filterbuttons ul {
+  gap: 5px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .allposts {
+	padding: 0 15px 70px;
+}
+}
+
+@media (max-width: 500px) {
+  .postsgrid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+</style>
+
+<section class="banner">
+  <div class="container">
+    <div class="bannercontentwrap">
+      <div class="bannercontent">
+        <p>Lost or Found something ?</p>
+        <p>
+          <span> We are here to help you</span>
+        </p>
+        <p>Join us to create your post</p>
+
+        <a class="defaultbutton" href="#">Join</a>
+      </div>
+      <div class="bannerimage">
+        <img src="../images/man.png" alt="Avatar" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="filterbuttons">
+  <div class="container">
+    <h2 class="sectiontitle">Post Filters</h2>
+    <ul>
+      <li><button id="lostFilterButton">Lost</button></li>
+      <li><button id="foundFilterButton">Found</button></li>
+      <li><button>Date</button></li>
+      <li><input id="dateFilter" type="date" /></li>
+      <li><button>Location</button></li>
+      <li>
+        <button id="clearFilterButton">Clear Filters</button>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="allposts">
+<div class="container">
+  <h2 class="sectiontitle">All posts</h2>
+
+  <div id="postview" class="postsgrid">
+  
+  </div>
+</div>
+</section>
+
+

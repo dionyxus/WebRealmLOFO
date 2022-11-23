@@ -1,0 +1,186 @@
+<style>
+  #map {
+    height: 300px;
+    width: 100%;
+    border: 1px solid #000000;
+    border-radius: 4px;
+  }
+
+  .singleproductview {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 100px;
+  }
+
+  #title {
+    font-size: 36px;
+    font-weight: 700;
+    border-bottom: 2px solid #df6536;
+    padding-bottom: 10px;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    color: #df6536;
+  }
+
+  .eachdetail {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .productdetailwrap {
+    background: #5a5957;
+    padding: 70px 15px;
+  }
+
+  .proimage {
+    background-color: #d1d0ce;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .proimage img {
+    height: 250px;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .ownerdetail {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #ffffff;
+  }
+
+  .ownerdetail .eachdetail span {
+    display: block;
+    font-weight: bold;
+  }
+
+  .ownerdetail .ownerimage {
+    max-width: 100px;
+    min-width: 100px;
+  }
+
+  .ownerdetail .ownerimage #proownerimage {
+    height: 100px;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .productdate {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .productdate > div {
+    background-color: #ffffff;
+    border-radius: 4px;
+    text-align: center;
+    flex: 1;
+    padding: 15px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .productcontact {
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    background: #df6536;
+    border-radius: 4px;
+    border: 0px;
+    color: #fff;
+  }
+
+  .productdetail h4 {
+    margin: 0 0 10px;
+    color: #fff;
+    font-size: 18px;
+  }
+
+  .productdetail #desc {
+    padding: 10px;
+    min-height: 160px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 30px;
+  }
+
+  #messagebox {
+	width: 100%;
+	padding: 10px;
+	height: 50px;
+	margin-bottom: 15px;
+    font-size: 16px;
+}
+
+  @media (max-width: 1200px) {
+    .singleproductview {
+      gap: 30px;
+    }
+  }
+
+  @media (max-width: 770px) {
+    .singleproductview {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .productdate > div {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<section class="productdetailwrap">
+  <div class="container">
+    <div id="title" class="eachdetail"></div>
+
+    <div class="singleproductview">
+      <div class="productimage">
+        <div class="ownerdetail">
+          <div class="ownerimage">
+            <img
+              id="proownerimage"
+              src="https://img.freepik.com/free-photo/close-up-confident-male-employee-white-collar-shirt-smiling-camera-standing-self-assured-against-studio-background_1258-26761.jpg?w=2000"
+            />
+          </div>
+          <div id="username" class="eachdetail"></div>
+        </div>
+
+        <div class="proimage"><img id="itemimage" /></div>
+        <div class="productdate">
+          <div id="reward" class="eachdetail"></div>
+          <div id="datetime" class="eachdetail"></div>
+        </div>
+        <div class="promsg">
+            <!-- Send Message: <br> -->
+            <input type="text" id="messagebox" placeholder="Enter your message">
+            <input class="productcontact" type="button" id="sendmessagebutton" value="Send Message">
+        
+        </div>
+        <!-- <input  type="button" value="Contact Owner" /> -->
+      </div> 
+
+      <div class="productdetail">
+        <h4>Description</h4>
+        <div id="desc" class="eachdetail"></div>
+        <h4>Location</h4>
+        <div id="map" class="eachdetail"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script
+  async
+  defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnqgKalWGR9um-5t-xdHoRq0RU2C4PBSs&callback=initMap"
+></script>
+
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../src/styles/index.css">
+    <link rel="manifest" href="app.webmanifest" />
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="images/logo.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="images/logo.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="images/apple-touch-icon.png"
+  />
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('./sw.js')
+
+        .then(function (reg) {
+          console.log(`Service Worker Registered`);
+        })
+        .catch(function (error) {
+          console.log(`Service Worker Error (${error})`);
+        });
+    } else {
+      console.error("This browser doesn't support Service Worker");
+    }
+  </script>
+
+</head>
+<body>
+
+    <header class="header">
+        <!-- anything shell header related goes here. e.g. top menu -->
+        <div class="toolbar container">
+        <ul>
+          <li class="sitelogo"><img src="../images/logo.png" alt="logo" width="80" height="40"></li>
+          <li><a href="#homepage">Home</a></li>
+          
+          <li class="floatright"><a href="#chat">Messages</a></li>
+          <li class="floatright"><a href="#addpost">Create Post</a></li>
+          <li class="floatright"><a href="#useracc">User Account</a></li>
+        </ul>
+        </div>
+      </header>
+       <!-- <div>
+        <ul class="navibar">
+          <li class="navli"><a href="#homepage">Filter Bt Date</a></li>
+          <li class="navli" class="floatright"><a href="#addpost">Filter By Location</a></li>
+          <li class="navli" class="floatright"><a href="#chat">Filter by Position</a></li>
+          <li class="navli" class="floatright"><a href="#chat">Filter by Latest Post</a></li>
+          
+        </ul>
+        </div> -->
+      <!-------------------------------->
+      <div id="mainArea">
+        <!-- the main part will be dynamically updated as each page loads -->
+      </div>
+      <!-------------------------------->
+
+      <footer class="footer">
+        <!-- anything shell header related goes here. e.g. top menu -->
+        <div class="footbar">
+
+<img src="../images/logo.png" alt="logo" width="80" height="40" class="center"><br>
+<p class="txt"> Langara college 100 W 49th Ave, Vancouver, BC V5Y 2Z6</p>
+
+
+        </div>
+      </footer>
+      <script src="../src/js/routing.js"></script>
+      <script src="../src/js/script.js"></script>
+
+    <script src="../dist/js/index.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnqgKalWGR9um-5t-xdHoRq0RU2C4PBSs&callback=initMap"></script>
+</body>
+</html>

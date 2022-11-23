@@ -1,0 +1,243 @@
+
+    <style>
+      .formwrap {
+        background: #5a5957;
+        padding: 10px 15px;
+      }
+    
+      
+    
+      .formphotos label {
+        font-size: 18px;
+        color: #fff;
+      }
+    
+      h1 {
+        font-size: 36px;
+        font-weight: 700;
+        border-bottom: 2px solid #df6536;
+        padding-bottom: 10px;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+        color: #df6536;
+      }
+    
+      .addpostview {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 100px;
+      }
+    
+      .addpostview h4 {
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        margin: 20px 0 15px;
+      }
+    
+      #map {
+        height: 250px;
+        width: 100%;
+        border: 1px solid #000000;
+        border-radius: 4px;
+      }
+    
+      #itemimage {
+        width: 75%;
+        border-radius: 15px;
+        margin-top: 80;
+        margin-left: 20;
+      }
+      /* .imagebuttons {
+        margin-top: -100;
+        float: left;
+    } */
+    
+      .camerabuttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 0.5fr));
+        gap: 50px;
+        
+        align-items: center;
+      }
+    
+      .formimage {
+        margin-top: 20px;
+      }
+
+      .camerabuttons button {
+        padding: 5px 10px;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        background: #fff;
+        border: 1px solid #fff;
+        border-radius: 4px;
+      }
+    
+      .camerabuttons h4 {
+        margin: 15px;
+      }
+    
+      #uploadimage {
+        font-size: 17px;
+      }
+    
+      .formdetail input[type='text'] {
+        width: 75%;
+        padding: 10px 15px;
+        font-size: 18px;
+        background: transparent;
+        border: 1px solid #ffffff;
+        color: white;
+        border-radius: 4px;
+        
+      }
+    
+      .formdetail textarea {
+        width: 75%;
+        padding: 10px 15px;
+        font-size: 18px;
+        background: transparent;
+        border: 1px solid #ffffff;
+        color: white;
+        border-radius: 4px;
+       
+      }
+    
+      .formdetail input[type='datetime-local'] {
+        width: 75%;
+        padding: 10px 15px;
+        font-size: 18px;
+        background: transparent;
+        border: 1px solid #ffffff;
+        color: white;
+        border-radius: 4px;
+      }
+
+     
+    
+      /* .formdetail h4 {
+        margin: 5px 0 15px;
+      } */
+    
+      #submitpostbutton {
+        width: 75%;
+        padding: 15px;
+        font-size: 20px;
+        background: #df6536;
+        border-radius: 4px;
+        border: 0px;
+        color: #fff;
+        margin-top: 30px;
+        float: center;
+      }
+    
+      @media (max-width: 770px) {
+        .addpostview {
+          display: grid;
+          grid-template-columns: repeat(1, minmax(0, 1fr));
+          gap: 30px;
+        }
+    
+        .camerabuttons button {
+          display: inline-block;
+          width: 50%;
+          margin-top: 10px;
+          margin-bottom: 5px;
+        }
+
+        .camerabuttons {
+	
+	grid-template-columns: repeat(1, minmax(0, 1fr));
+	gap: 15px;
+}
+
+.formdetail input[type='datetime-local'] {
+        width: 100%;
+      }
+
+      .formdetail input[type='text'] {
+        width: 100%;
+      }
+
+      .formdetail textarea {
+        width: 100%;
+      }
+
+      #submitpostbutton {
+        width: 100%
+      }
+      }
+    </style>
+    
+    <section class="formwrap">
+      <div class="container">
+        <div><h1>New post</h1></div>
+        <form id="postForm1" action="action_page.php">
+          <div class="addpostview">
+            <div class="formphotos">
+              <h4>Choose item type</h4>
+              <label for="lostRadioButton">Lost</label>
+              <input type="radio" id="lostRadioButton" name="lost" value="lost" />
+              <label for="foundRadioButton">Found</label>
+              <input type="radio" id="foundRadioButton" name="lost" value="found" />
+              <h4>Mark your location</h4>
+              <div id="map"></div>
+    
+              <div class="formimage">
+                <h4>Capture or Upload Photo</h4>
+    
+                <div class="camerabuttons">
+                  <div class="imageview">
+                    <img id="itemimage" src="/images/CameraIcon.jpeg" />
+                    <video id="video" width="200" height="300" autoplay></video>
+                    <canvas id="canvas" width="200" height="300"></canvas>
+                  </div>
+                  <div class="imagebuttons">
+                    <input type="file" id="uploadimage" name="myfile" />
+                    <h4>or</h4>
+                    <button id="start">Start Camera</button>
+                    <button id="snap">Snap Photo</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="formdetail">
+              <h4>Post Title</h4>
+              <input type="text" id="title" name="title" placeholder="Title" />
+    
+              <h4>Description</h4>
+    
+              <textarea
+                type="text"
+                rows="6"
+                id="desc"
+                cols="50"
+                name="Description"
+                placeholder="Enter text"
+              ></textarea>
+              <h4>Reward</h4>
+    
+              <input
+                type="text"
+                id="reward"
+                cols="40"
+                name="Reward"
+                placeholder="Enter Reward(Optional)"
+                required
+              />
+              <h4>Possible Lost Date/Time</h4>
+    
+              <input
+                type="datetime-local"
+                id="possibleLostDateTime"
+                name="lostTime"
+                placeholder="Lost Date/Time"
+                required
+              />
+              <input type="submit" id="submitpostbutton" value="Submit" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
