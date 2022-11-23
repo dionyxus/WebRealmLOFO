@@ -6,6 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../src/styles/index.css">
+    <link rel="manifest" href="app.webmanifest" />
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="images/logo.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="images/logo.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="images/apple-touch-icon.png"
+  />
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('./sw.js')
+
+        .then(function (reg) {
+          console.log(`Service Worker Registered`);
+        })
+        .catch(function (error) {
+          console.log(`Service Worker Error (${error})`);
+        });
+    } else {
+      console.error("This browser doesn't support Service Worker");
+    }
+  </script>
 
 </head>
 <body>

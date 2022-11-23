@@ -95,10 +95,18 @@ function makemessagelist(){
 
             let chatcontainer = document.createElement("div");
             chatcontainer.innerHTML += `
-            User: ${username} || Title: ${title} <br>
-            Message: ${value.message} || ${datetimestring} <br>
-            <input type="text" id="${key}_textinput">  
-            <input type="button" value="Reply" id="${key}_button"> <br><br>
+            <div class="messagecontainer">
+            <div class="chatuserinfo">
+            <span> User:</span> ${username} 
+            <span>Title:</span> ${title} 
+            <h5>${datetimestring}</h5>
+             </div>
+             
+           <h4> <span>Message:</span> ${value.message} </h4>
+             <input type="text" id="${key}_textinput">  
+             <input type="button" value="Reply" id="${key}_button"> 
+            </div>
+          
             `;
 
             maincontainer.appendChild(chatcontainer);
