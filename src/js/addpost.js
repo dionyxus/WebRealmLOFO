@@ -158,7 +158,8 @@ context.scale(0.5, 0.5);
 
 let jpegBlob;
 
-document.getElementById('start').addEventListener('click', function () {
+document.getElementById('start').addEventListener('click', function (e) {
+  e.preventDefault();
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     // Not adding `{ audio: true }` since we only want video now
     navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
@@ -174,7 +175,8 @@ document.getElementById('start').addEventListener('click', function () {
 });
 
 // Trigger photo take
-document.getElementById('snap').addEventListener('click', () => {
+document.getElementById('snap').addEventListener('click', (e) => {
+  e.preventDefault();
   //canvas.width = video.videoWidth;
   //canvas.height = video.videoHeight;
   context.drawImage(video, 0, 0);
