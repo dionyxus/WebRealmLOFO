@@ -98,7 +98,7 @@ function makemessagelist(){
             <div class="messagecontainer">
             <div class="chatuserinfo">
             <span> User:</span> ${username} 
-            <span>Title:</span> ${title} 
+            <span>Post:</span> ${title} 
             <h5>${datetimestring}</h5>
              </div>
              

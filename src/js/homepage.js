@@ -21,10 +21,15 @@ const firebaseConfig = {
   measurementId: 'G-ZZH3G9HQHW',
 };
 
+import { getAuth, signInWithPopup,onAuthStateChanged,GoogleAuthProvider } from "firebase/auth";
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore();
+
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
 
 const colRef = collection(db, 'Posts');
 
@@ -101,6 +106,8 @@ function makePostGrid(postList, postView) {
       ':' +
       postdatetime.getMinutes();
 
+    let lostString = post.islost ? "Lost" : "Found";
+
     let postcontainer = document.createElement('div'); //${post.imageURL}
     postcontainer.setAttribute('class', `item singlepost`);
     postcontainer.innerHTML += `
@@ -110,7 +117,7 @@ function makePostGrid(postList, postView) {
 
                 <div class="caption">
                     <h4>
-                    <span>${post.isfound}:</span> ${post.title}</h4>
+                    <span>${lostString}:</span> ${post.title}</h4>
                         <h4>
                        <span>Posted By:</span>  ${post.username}</h4>
                     
@@ -190,6 +197,30 @@ clearFilterButton.addEventListener('click', (e) => {
 
   postview.innerHTML = '';
   makePostGrid(postList, postview);
+});
+
+joinButton.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  signInWithPopup(auth, provider)
+                    .then((result) => {
+                        // This gives you a Google Access Token. You can use it to access the Google API.
+                        const credential = GoogleAuthProvider.credentialFromResult(result);
+                        const token = credential.accessToken;
+                        // The signed-in user info.
+                        user = result.user;
+
+                        // ...
+                    }).catch((error) => {
+                        // Handle Errors here.
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        // The email of the user's account used.
+                        //const email = error.customData.email;
+                        // The AuthCredential type that was used.
+                        const credential = GoogleAuthProvider.credentialFromError(error);
+                        // ...
+                    });
 });
 
 //console.log(postList);

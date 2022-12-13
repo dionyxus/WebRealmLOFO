@@ -41,12 +41,20 @@
         border: 1px solid #000000;
         border-radius: 4px;
       }
-    
+    /*
       #itemimage {
         width: 75%;
         border-radius: 15px;
         margin-top: 80;
         margin-left: 20;
+      }
+*/
+      .itemimagestyle{
+        width: 75%;
+        border-radius: 15px;
+        margin-top: 80;
+        margin-left: 20;
+        height: 75%;
       }
       /* .imagebuttons {
         margin-top: -100;
@@ -132,6 +140,11 @@
         float: center;
       }
     
+      #submitpostbutton:hover {
+    background-color: orangered;
+    color: white;
+  }
+
       @media (max-width: 770px) {
         .addpostview {
           display: grid;
@@ -189,9 +202,9 @@
     
                 <div class="camerabuttons">
                   <div class="imageview">
-                    <img id="itemimage" src="/images/CameraIcon.jpeg" />
-                    <video id="video" width="200" height="300" autoplay></video>
-                    <canvas id="canvas" width="200" height="300"></canvas>
+                    <img id="itemimage" src="/images/CameraIcon.jpeg" class="itemimagestyle"/>
+                    <video id="video" autoplay class="itemimagestyle"></video>
+                    <canvas id="canvas" class="itemimagestyle"></canvas>
                   </div>
                   <div class="imagebuttons">
                     <input type="file" id="uploadimage" name="myfile" />
@@ -223,7 +236,7 @@
                 id="reward"
                 cols="40"
                 name="Reward"
-                placeholder="Enter Reward(Optional)"
+                placeholder="Enter Reward (Optional)"
                 required
               />
               <h4>Possible Lost Date/Time</h4>

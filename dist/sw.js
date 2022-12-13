@@ -1,6 +1,6 @@
 'use strict';
 const cacheName = 'offline-mode-cache-v1',
-  contentToCache = ['./images/logo.png'];
+  contentToCache = ['offline.png'];
 
 self.addEventListener('fetch', function (e) {
   e.respondWith(
@@ -28,6 +28,7 @@ self.addEventListener('fetch', function (e) {
     );
   }),
   
+
   self.addEventListener('activate', (e) => {
     e.waitUntil(
       caches.keys().then((e) =>
